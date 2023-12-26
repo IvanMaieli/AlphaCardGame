@@ -46,7 +46,7 @@ public abstract class CharacterCard extends Card {
         this.add(panelSpecs);
 
         panelName = new JPanel();
-        panelName.setBounds(0, (int)(cardHeight - 1.35 * (cardHeight * 0.15)), cardWidth, (int)(cardHeight * 0.15) + 1);
+        panelName.setBounds(0, (int)(cardHeight - 1.4 * (cardHeight * 0.15)), cardWidth, (int)(cardHeight * 0.15) + 1);
         panelName.setBackground(new Color(14, 20, 40));
         panelName.setFont(fontCard);
         panelName.setLayout(null);

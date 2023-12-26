@@ -87,7 +87,7 @@ public class Board extends JFrame {
         cards = new LinkedList<>();
 
         for (int i = 0; i < 40; i++) {
-            if(i < 20) cards.add(new CyberCrab(cardWidth, cardHeight));
+            if(i < 20) cards.add(new Nebula(cardWidth, cardHeight));
             else if(i < 30) cards.add(new Gigatron(cardWidth, cardHeight));
             else cards.add(new Dragon(cardWidth, cardHeight));
         }
