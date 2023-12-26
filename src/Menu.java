@@ -46,8 +46,9 @@ public class Menu extends JFrame {
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
             if(mouseEvent.getSource() == play) {
-                board = new Board();
                 dispose();
+                board = new Board();
+                
             }
         }
 

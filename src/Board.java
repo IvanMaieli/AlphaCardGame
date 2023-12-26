@@ -25,15 +25,23 @@ public class Board extends JFrame {
         int width = (int) (screenWidth - (screenWidth * 0.11));
 
         int panelWidth = (int)(width - 20 - screenWidth / 100 * 0.8);
-        int panelHeight = (height - 85) / 4;
+        int panelHeight = (height - 85) / 2;
 
         this.setTitle("CyberAttack");
         this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height);
-        this.setVisible(true);
         this.setLayout(null);
-        this.setResizable(false);
+        //this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        p1 = new Player(panelWidth, panelHeight);
+        p1.setBounds(10, 10, panelWidth, panelHeight);
+        p1.setVisible(true);
+        this.getContentPane().add(p1);
+        p2 = new Player(panelWidth, panelWidth);
+        p2.setBounds(10, panelHeight + 20, panelWidth, panelHeight);
+        p2.setVisible(true);
+        this.getContentPane().add(p2);
+        
         int buttonFieldHeight = 200;
         int buttonFieldWidth = 200;
 
@@ -58,14 +66,15 @@ public class Board extends JFrame {
         buttonField.add(deleteButton);
         deleteButton.setVisible(true);
 
-        p1 = new Player(width, height);
-        p2 = new Player(width, height);
+        this.setVisible(true);
 
         mix();
 
         positioning();
 
         repaint();
+
+        
     }
 
     private void positioning() {
@@ -93,6 +102,8 @@ public class Board extends JFrame {
 
         p1.giveCards(deckP1);
         p2.giveCards(deckP2);
+
+        repaint();
     }
 
     private class BoardListener implements MouseListener {
