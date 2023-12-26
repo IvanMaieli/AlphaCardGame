@@ -47,9 +47,6 @@ public abstract class CharacterCard extends Card {
         panelName.setVisible(true);
         this.add(panelName);
 
-
-
-
     }
 
     @Override
