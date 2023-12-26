@@ -14,6 +14,9 @@ public class Board extends JFrame {
     private int cardHeight;
     private Player p1;
     private Player p2;
+    private final Color stdColorCard = new Color(54, 56, 46);
+    private final Color epicColorCard = new Color(218, 218, 217);
+    private final Color legendaryColorCard = new Color(240, 100, 73);
 
     public Board() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -87,9 +90,10 @@ public class Board extends JFrame {
         cards = new LinkedList<>();
 
         for (int i = 0; i < 40; i++) {
-            if(i < 20) cards.add(new Nebula(cardWidth, cardHeight));
-            else if(i < 30) cards.add(new Gigatron(cardWidth, cardHeight));
-            else cards.add(new Dragon(cardWidth, cardHeight));
+            if(i < 5) cards.add(new Nebula(cardWidth, cardHeight, legendaryColorCard));
+            else if(i < 15) cards.add(new Gigatron(cardWidth, cardHeight, epicColorCard));
+            else if(i < 30) cards.add(new Dragon(cardWidth, cardHeight, stdColorCard));
+            else cards.add(new Wolf(cardWidth, cardHeight, stdColorCard));
         }
 
         Collections.shuffle(cards);

@@ -1,15 +1,18 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public abstract class CharacterCard extends Card {
+
     private String name;
     private int attack;
     private int defense;
     private Image frontImg;
     private Image backImg;
     private JLabel img;
-    private Color color;
+    private final Color stdColorCard = new Color(28, 49, 68);
+    private Color color; // (255, 186, 8) = leggendaria, (208, 0, 0) = epica, colore standard = comune
     private JPanel panelSpecs;
     private JPanel panelName;
     private JLabel attackTextLabel;
@@ -19,6 +22,7 @@ public abstract class CharacterCard extends Card {
     private JLabel nameLabel;
     private int cardWidth;
     private int cardHeight;
+    private boolean pressed = false;
 
 
     public CharacterCard(String name, int attack, int defense, String imgPath, Color color, int cardWidth, int cardHeight) {
@@ -31,23 +35,24 @@ public abstract class CharacterCard extends Card {
         this.cardWidth = cardWidth;
         this.cardHeight = cardHeight;
 
-        Font fontCard = new Font("Calibri", Font.BOLD, 16);
+        Font fontCard = new Font("Monospaced", Font.BOLD, 16);
 
         this.setSize(cardWidth, cardHeight);
         this.setLayout(null);
         this.setVisible(true);
         this.setBackground(color);
+        this.addMouseListener(new CardListener());
 
         panelSpecs = new JPanel();
         panelSpecs.setBounds(0,0,cardWidth, (int)(cardHeight * 0.2));
-        panelSpecs.setBackground(new Color(14, 20, 40));
+        panelSpecs.setBackground(stdColorCard);
         panelSpecs.setLayout(null);
         panelSpecs.setVisible(true);
         this.add(panelSpecs);
 
         panelName = new JPanel();
-        panelName.setBounds(0, (int)(cardHeight - 1.4 * (cardHeight * 0.15)), cardWidth, (int)(cardHeight * 0.15) + 1);
-        panelName.setBackground(new Color(14, 20, 40));
+        panelName.setBounds(0, (int)(cardHeight - 1.45 * (cardHeight * 0.15)), cardWidth, (int)(cardHeight * 0.15) + 1);
+        panelName.setBackground(stdColorCard);
         panelName.setFont(fontCard);
         panelName.setLayout(null);
         panelName.setVisible(true);
@@ -59,32 +64,32 @@ public abstract class CharacterCard extends Card {
         img.setVisible(true);
         this.add(img);
 
-        int labelWidth = (int) (panelSpecs.getWidth() * 0.2);
+        int labelWidth = (int) (panelSpecs.getWidth() * 0.25);
         int labelHeight = 30;
 
         attackTextLabel = new JLabel("ATT:");
-        attackTextLabel.setForeground(Color.WHITE);
+        attackTextLabel.setForeground(new Color(235, 212, 203));
         attackTextLabel.setFont(fontCard);
         attackTextLabel.setBounds((int)(cardWidth * 0.09), (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         attackTextLabel.setVisible(true);
         panelSpecs.add(attackTextLabel);
 
         attackLabel = new JLabel("" + attack);
-        attackLabel.setForeground(new Color(217, 93, 57));
+        attackLabel.setForeground(new Color(235, 212, 203));
         attackLabel.setFont(fontCard);
         attackLabel.setBounds(attackTextLabel.getX() + labelWidth, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         attackLabel.setVisible(true);
         panelSpecs.add(attackLabel);
 
         defTextLabel = new JLabel("DEF:");
-        defTextLabel.setForeground(Color.WHITE);
+        defTextLabel.setForeground(new Color(235, 212, 203));
         defTextLabel.setFont(fontCard);
         defTextLabel.setBounds(panelSpecs.getWidth() - 2 * labelWidth, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         defTextLabel.setVisible(true);
         panelSpecs.add(defTextLabel);
 
         defLabel = new JLabel("" + defense);
-        defLabel.setForeground(new Color(123, 158, 137));
+        defLabel.setForeground(new Color(235, 212, 203));
         defLabel.setFont(fontCard);
         defLabel.setBounds(panelSpecs.getWidth() - labelWidth, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         defLabel.setVisible(true);
@@ -92,14 +97,12 @@ public abstract class CharacterCard extends Card {
 
         int nameLabelWidth = 150;
         nameLabel = new JLabel(name);
-        nameLabel.setForeground(Color.WHITE);
+        nameLabel.setForeground(new Color(235, 212, 203));
         nameLabel.setFont(fontCard);
         nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
         nameLabel.setBounds((panelName.getWidth() - nameLabelWidth) / 2, (panelName.getHeight() - labelHeight) / 2, nameLabelWidth, labelHeight);
         nameLabel.setVisible(true);
         panelName.add(nameLabel);
-        System.out.println(panelName.getWidth());
-        System.out.println(panelName.getHeight());
 
     }
 
@@ -157,5 +160,34 @@ public abstract class CharacterCard extends Card {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    private class CardListener implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent mouseEvent) {}
+
+        @Override
+        public void mousePressed(MouseEvent mouseEvent) {}
+
+        @Override
+        public void mouseReleased(MouseEvent mouseEvent) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent mouseEvent) {
+            Component[] components = getComponents();
+            for(Component c : components)
+                c.setBackground(new Color(5, 100, 240));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent mouseEvent) {
+            Component[] components = getComponents();
+            for(Component c : components)
+                c.setBackground(stdColorCard);
+
+        }
+
     }
 }

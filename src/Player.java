@@ -8,7 +8,7 @@ public class Player extends JPanel{
     private JPanel deckPanel;
     private JPanel field;
     private LinkedList<Card> deck;
-    
+    private LinkedList<Card> selectedCards;
     private int panelWidth;
     private int panelHeight;
     private  int deckWidth;
@@ -64,7 +64,7 @@ public class Player extends JPanel{
             c.setBounds((10 * (i + 1)) + (cardWidth * i), 10, cardWidth, cardHeight);
             c.setLayout(null);
             c.setVisible(true);
-            if(!turn) c.coverCard();
+            //if(!turn) c.coverCard();
             deckPanel.add(c);
             deckPanel.repaint();
             i++;
