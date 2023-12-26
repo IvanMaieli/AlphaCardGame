@@ -27,20 +27,14 @@ public class Board extends JFrame {
         int panelWidth = (int)(width - 20 - screenWidth / 100 * 0.8);
         int panelHeight = (height - 85) / 2;
 
+        cardHeight = (panelHeight / 2) - 20;
+        cardWidth = (int) (panelWidth - 80) / 7;
+
         this.setTitle("CyberAttack");
         this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height);
         this.setLayout(null);
-        //this.setResizable(false);
+        this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        p1 = new Player(panelWidth, panelHeight);
-        p1.setBounds(10, 10, panelWidth, panelHeight);
-        p1.setVisible(true);
-        this.getContentPane().add(p1);
-        p2 = new Player(panelWidth, panelWidth);
-        p2.setBounds(10, panelHeight + 20, panelWidth, panelHeight);
-        p2.setVisible(true);
-        this.getContentPane().add(p2);
         
         int buttonFieldHeight = 200;
         int buttonFieldWidth = 200;
@@ -50,7 +44,7 @@ public class Board extends JFrame {
         buttonField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         buttonField.setLayout(null);
         buttonField.setVisible(true);
-        this.getContentPane().add(buttonField);
+        this.add(buttonField);
 
         attackButton = new JButton("Attacca");
         attackButton.setBounds(10, 10, 180, 85);
@@ -66,19 +60,29 @@ public class Board extends JFrame {
         buttonField.add(deleteButton);
         deleteButton.setVisible(true);
 
-        this.setVisible(true);
+        p1 = new Player(panelWidth, panelHeight, 1, Color.RED, true);
+        p1.setBounds(10, 10, panelWidth, panelHeight);
+//        p1.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
+        p1.setLayout(null);
+        p1.setVisible(true);
+        this.add(p1);
+
+        p2 = new Player(panelWidth, panelHeight, 2, Color.BLUE, false);
+        p2.setBounds(10, panelHeight + 20, panelWidth, panelHeight);
+//        p2.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
+        p2.setLayout(null);
+        p2.setVisible(true);
+        this.add(p2);
 
         mix();
-
-        positioning();
-
+        p1.revalidate();
+        p1.repaint();
+        p2.revalidate();
+        p2.repaint();
+        validate();
         repaint();
 
-        
-    }
-
-    private void positioning() {
-
+        this.setVisible(true);
     }
 
     private void mix() {
@@ -86,8 +90,7 @@ public class Board extends JFrame {
 
         for (int i = 0; i < 40; i++) {
             if(i < 20) cards.add(new CyberCrab(cardWidth, cardHeight));
-            else if (i < 30) cards.add(new Gigatron(cardWidth, cardHeight));
-            else cards.add(new NanoMech(cardWidth, cardHeight));
+            else cards.add(new Gigatron(cardWidth, cardHeight));
         }
 
         Collections.shuffle(cards);
@@ -102,7 +105,10 @@ public class Board extends JFrame {
 
         p1.giveCards(deckP1);
         p2.giveCards(deckP2);
-
+        p1.revalidate();
+        p1.repaint();
+        p2.revalidate();
+        p2.repaint();
         repaint();
     }
 

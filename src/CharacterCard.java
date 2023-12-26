@@ -18,8 +18,8 @@ public abstract class CharacterCard extends Card {
         this.name = name;
         this.damage = attack;
         this.life = life;
-        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(cardWidth,(int) (cardHeight - (cardHeight * 0.15) - (cardHeight * 0.20)),Image.SCALE_SMOOTH);
-        this.backImg = new ImageIcon("raw_images/cards/back_card.jpg").getImage().getScaledInstance(cardWidth,(int) (cardHeight - (cardHeight * 0.15) - (cardHeight * 0.20)),Image.SCALE_SMOOTH);
+        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(cardWidth, (int)(cardHeight - (cardHeight * 0.15) - (cardHeight * 0.20)), Image.SCALE_SMOOTH);
+        this.backImg = new ImageIcon("raw_images/cards/back_card.jpg").getImage().getScaledInstance(cardWidth, cardHeight, Image.SCALE_SMOOTH);
         this.color = color;
         this.cardWidth = cardWidth;
         this.cardHeight = cardHeight;
@@ -32,6 +32,7 @@ public abstract class CharacterCard extends Card {
         panelSpecs = new JPanel();
         panelSpecs.setBounds(0,0,cardWidth,(int)(cardHeight * 0.2));
         panelSpecs.setBackground(Color.lightGray);
+        panelSpecs.setLayout(null);
         panelSpecs.setVisible(true);
         this.add(panelSpecs);
 
@@ -44,11 +45,20 @@ public abstract class CharacterCard extends Card {
         panelName = new JPanel();
         panelName.setBounds(0, (int)(cardHeight - (cardHeight * 0.15)),cardWidth, (int)(cardHeight * 0.15) + 1);
         panelName.setBackground(Color.lightGray);
+        panelName.setLayout(null);
         panelName.setVisible(true);
         this.add(panelName);
 
     }
 
+    @Override
+    public void coverCard() {
+        panelSpecs.setVisible(false);
+        panelName.setVisible(false);
+        img.setIcon(new ImageIcon(backImg));
+        img.setBounds(0,0, cardWidth, cardHeight);
+        img.setVisible(true);
+    }
     @Override
     public String getName() {
         return name;
@@ -89,5 +99,10 @@ public abstract class CharacterCard extends Card {
 
     public void setBackImg(Image backImg) {
         this.backImg = backImg;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
