@@ -63,7 +63,6 @@ public class Player extends JPanel{
         for(Card c : deck) {
             c.setBounds((10 * (i + 1)) + (cardWidth * i), 10, cardWidth, cardHeight);
             c.setLayout(null);
-            c.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
             c.setVisible(true);
             if(!turn) c.coverCard();
             deckPanel.add(c);

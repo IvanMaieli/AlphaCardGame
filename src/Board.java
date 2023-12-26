@@ -62,14 +62,12 @@ public class Board extends JFrame {
 
         p1 = new Player(panelWidth, panelHeight, 1, Color.RED, true);
         p1.setBounds(10, 10, panelWidth, panelHeight);
-//        p1.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
         p1.setLayout(null);
         p1.setVisible(true);
         this.add(p1);
 
         p2 = new Player(panelWidth, panelHeight, 2, Color.BLUE, false);
         p2.setBounds(10, panelHeight + 20, panelWidth, panelHeight);
-//        p2.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
         p2.setLayout(null);
         p2.setVisible(true);
         this.add(p2);
