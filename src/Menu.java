@@ -1,17 +1,12 @@
 import javax.swing.*;
-import javax.swing.event.MenuListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Menu extends JFrame {
     private JButton play;
     private JButton rules;
-
     private Board board;
-
 
     public Menu() {
         this.setTitle("Menu CyberAttack");
@@ -30,8 +25,8 @@ public class Menu extends JFrame {
         this.setResizable(false);
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        int buttonHeight = 70;
-        int buttonWidth = 380;
+        int buttonHeight = 68;
+        int buttonWidth = (int) (380 - screenWidth / 100 * 0.8);
 
         play = new JButton("Play");
         play.setBounds(10, 10, buttonWidth, buttonHeight);

@@ -1,6 +1,5 @@
 public class CyberAttack {
     private Menu menu;
-    private Board board;
 
     public CyberAttack() {
         menu = new Menu();

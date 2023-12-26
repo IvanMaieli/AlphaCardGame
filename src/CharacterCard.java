@@ -6,38 +6,43 @@ public abstract class CharacterCard extends Card {
     private int damage;
     private int life;
     private Image frontImg;
-    private Image backImg = new ImageIcon("../raw_images/cards/back_card.jpg").getImage().getScaledInstance(116,150,Image.SCALE_SMOOTH);
+    private Image backImg;
     private JLabel img;
     private Color color;
     private JPanel panelSpecs;
     private JPanel panelName;
+    private int cardWidth;
+    private int cardHeight;
 
-    public CharacterCard(String name, int attack, int life, String imgPath, Color color) {
+    public CharacterCard(String name, int attack, int life, String imgPath, Color color, int cardWidth, int cardHeight) {
         this.name = name;
         this.damage = attack;
         this.life = life;
-        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(116,150,Image.SCALE_SMOOTH);
+        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(cardWidth,(int) (cardHeight - (cardHeight * 0.15) - (cardHeight * 0.20)),Image.SCALE_SMOOTH);
+        this.backImg = new ImageIcon("raw_images/cards/back_card.jpg").getImage().getScaledInstance(cardWidth,(int) (cardHeight - (cardHeight * 0.15) - (cardHeight * 0.20)),Image.SCALE_SMOOTH);
         this.color = color;
+        this.cardWidth = cardWidth;
+        this.cardHeight = cardHeight;
 
-        this.setSize(185, 210);
+        this.setSize(cardWidth, cardHeight);
         this.setLayout(null);
         this.setVisible(true);
         this.setBackground(color);
 
         panelSpecs = new JPanel();
-        panelSpecs.setBounds(0,0,185,40);
+        panelSpecs.setBounds(0,0,cardWidth,(int)(cardHeight * 0.2));
         panelSpecs.setBackground(Color.lightGray);
         panelSpecs.setVisible(true);
         this.add(panelSpecs);
 
         img = new JLabel();
         img.setIcon(new ImageIcon(frontImg));
-        img.setBounds(34,40,116,150);
+        img.setBounds(0,(int) (cardHeight * 0.2),cardWidth,(int) (cardHeight - (cardHeight * 0.15) - (cardHeight * 0.20)));
         img.setVisible(true);
         this.add(img);
 
         panelName = new JPanel();
-        panelName.setBounds(0,190,185,20);
+        panelName.setBounds(0, (int)(cardHeight - (cardHeight * 0.15)),cardWidth, (int)(cardHeight * 0.15) + 1);
         panelName.setBackground(Color.lightGray);
         panelName.setVisible(true);
         this.add(panelName);
