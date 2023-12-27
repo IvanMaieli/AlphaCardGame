@@ -102,15 +102,6 @@ public class Player extends JPanel{
         field.repaint();
     }
 
-    public void waitTurn() {
-        for(Card c : deck) {
-            if(c != null) c.setEnabled(false);
-        }
-        for(Card c : selectedCards) {
-            if(c != null) c.setEnabled(false);
-        }
-    }
-
     public void chooseCards(LinkedList<Card> cards) {
         LinkedList<Card> tempCards = new LinkedList<>();
         int i = 0;
@@ -124,11 +115,11 @@ public class Player extends JPanel{
         for(Card c : deck) {
             if(c == null) {
                 if(i < tempCards.size()){
-                    deck.add(j, tempCards.removeFirst());
+                    deck.set(j, tempCards.removeFirst());
                     i++;
                 }
                 else {
-                    deck.add(j, cards.removeFirst());
+                    deck.set(j, cards.removeFirst());
                     deck.get(j).setPlayer(this);
                 }
             }
@@ -141,61 +132,63 @@ public class Player extends JPanel{
     }
 
     public void cardClicked(Card card) {
-        if(this.board.isPhasePositioning()) {
-            if(deck.contains(card)) {
-                if(numberOfElements(selectedCards) == 3) {
-                    JOptionPane.showMessageDialog(null, "Non puoi selezionare altre carte!");
+        if(turn) {
+            if (this.board.isPhasePositioning()) {
+                if (deck.contains(card)) {
+                    if (numberOfElements(selectedCards) == 3) {
+                        JOptionPane.showMessageDialog(null, "Non puoi selezionare altre carte!");
+                    } else {
+                        int i = 0;
+                        for (Card c : deck) {
+                            if (c != null) {
+                                if (c.getId() == card.getId()) {
+                                    int j = 0;
+                                    for (Card z : selectedCards) {
+                                        if (z == null) {
+                                            selectedCards.set(j, deck.get(i));
+                                            break;
+                                        }
+                                        j++;
+                                    }
+                                    break;
+                                }
+                            }
+                            i++;
+                        }
+                        deckPanel.remove((Component) card);
+                        deck.set(i, null);
+                    }
                 } else {
                     int i = 0;
-                    for(Card c : deck) {
-                        if(c != null) {
-                            if(c.getId() == card.getId()) {
+                    for (Card c : selectedCards) {
+                        boolean exit = false;
+                        if (c != null) {
+                            if (c.getId() == card.getId()) {
                                 int j = 0;
-                                for(Card z : selectedCards) {
-                                    if(z == null){
-                                        selectedCards.set(j, deck.get(i));
+                                for (Card s : deck) {
+                                    if (s == null) {
+                                        exit = true;
                                         break;
                                     }
                                     j++;
                                 }
-                                break;
+                                if (exit) {
+                                    deck.set(j, c);
+                                    break;
+                                }
                             }
                         }
                         i++;
                     }
-                    deckPanel.remove((Component) card);
-                    deck.set(i, null);
+                    field.remove((Component) card);
+                    selectedCards.set(i, null);
                 }
-            } else {
-                int i = 0;
-                for(Card c : selectedCards) {
-                    boolean exit = false;
-                    if(c != null) {
-                        if (c.getId() == card.getId()) {
-                            int j = 0;
-                            for (Card s : deck) {
-                                if (s == null) {
-                                    exit = true;
-                                    break;
-                                }
-                                j++;
-                            }
-                            if (exit) {
-                                deck.set(j, c);
-                                break;
-                            }
-                        }
-                    }
-                    i++;
-                }
-                field.remove((Component) card);
-                selectedCards.set(i, null);
             }
+            System.out.println(deck.toString());
+            System.out.println(selectedCards.toString());
+            updateDeckView();
+            updateFieldView();
         }
-        System.out.println(deck.toString());
-        System.out.println(selectedCards.toString());
-        updateDeckView();
-        updateFieldView();
     }
 
     private int numberOfElements(LinkedList<Card> cards) {

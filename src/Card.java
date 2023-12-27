@@ -34,9 +34,8 @@ public abstract class Card extends JButton {
     @Override
     public boolean equals(Object o) {
         Card temp;
-        if(o instanceof Card) temp = (Card) o;
-        else return false;
-        if(temp == null) return false;
+        if(!(o instanceof Card)) return false;
+        temp = (Card) o;
         return this.getId() == temp.getId();
     }
 
@@ -65,7 +64,6 @@ public abstract class Card extends JButton {
             Component[] components = getComponents();
             for(Component c : components)
                 c.setBackground(new Color(28, 49, 68));
-
         }
 
     }

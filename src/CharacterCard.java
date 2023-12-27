@@ -155,7 +155,6 @@ public abstract class CharacterCard extends Card {
     }
 
     public boolean equals(CharacterCard characterCard){
-        if(this.getId() == characterCard.getId()) return true;
-        return false;
+        return this.getId() == characterCard.getId();
     }
 }

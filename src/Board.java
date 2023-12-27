@@ -15,8 +15,8 @@ public class Board extends JFrame {
     private int cardHeight;
     private Player p1;
     private Player p2;
-    private final Color stdColorCard = new Color(54, 56, 46);
-    private final Color epicColorCard = new Color(218, 218, 217);
+    private final Color stdColorCard = new Color(28, 49, 68);
+    private final Color epicColorCard = new Color(250, 199, 72);
     private final Color legendaryColorCard = new Color(240, 100, 73);
     private boolean phasePositioning = true;
     private int actualTurn = 1;
@@ -95,7 +95,6 @@ public class Board extends JFrame {
     }
 
     private void chooseCards(Player p1, Player p2) {
-        p2.waitTurn();
         p1.chooseCards(cards);
     }
 
