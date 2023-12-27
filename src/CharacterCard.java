@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public abstract class CharacterCard extends Card {
 
@@ -34,7 +32,7 @@ public abstract class CharacterCard extends Card {
         this.cardWidth = cardWidth;
         this.cardHeight = cardHeight;
 
-        Font fontCard = new Font("Monospaced", Font.BOLD, 16);
+        Font fontCard = new Font("Serif", Font.BOLD, 16);
 
         this.setSize(cardWidth, cardHeight);
         this.setLayout(null);
@@ -63,14 +61,14 @@ public abstract class CharacterCard extends Card {
         img.setVisible(true);
         this.add(img);
 
-        int labelWidth = (int) (panelSpecs.getWidth() * 0.40);
+        int labelWidth = (int) (panelSpecs.getWidth() * 0.4);
         int labelHeight = 30;
 
         attackLabel = new JLabel("ATT: " + attack);
         attackLabel.setForeground(new Color(235, 212, 203));
         attackLabel.setFont(fontCard);
         attackLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        attackLabel.setBounds((int)(cardWidth * 0.09), (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        attackLabel.setBounds((int)(cardWidth * 0.085), (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         attackLabel.setVisible(true);
         panelSpecs.add(attackLabel);
 
@@ -78,7 +76,7 @@ public abstract class CharacterCard extends Card {
         defLabel.setForeground(new Color(235, 212, 203));
         defLabel.setFont(fontCard);
         defLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        defLabel.setBounds(panelSpecs.getWidth() - (labelWidth + (int)(cardWidth * 0.09)), (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        defLabel.setBounds(panelSpecs.getWidth() - (labelWidth + (int)(cardWidth * 0.085)) - 2, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         defLabel.setVisible(true);
         panelSpecs.add(defLabel);
 
@@ -87,7 +85,7 @@ public abstract class CharacterCard extends Card {
         nameLabel.setForeground(new Color(235, 212, 203));
         nameLabel.setFont(fontCard);
         nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
-        nameLabel.setBounds((panelName.getWidth() - nameLabelWidth) / 2, (panelName.getHeight() - labelHeight) / 2, nameLabelWidth, labelHeight);
+        nameLabel.setBounds((panelName.getWidth() - nameLabelWidth) / 2, (panelName.getHeight() - labelHeight) / 2 - 1 , nameLabelWidth, labelHeight);
         nameLabel.setVisible(true);
         panelName.add(nameLabel);
 
