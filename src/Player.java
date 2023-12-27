@@ -28,6 +28,9 @@ public class Player extends JPanel{
         this.setLayout(null);
 
         selectedCards = new LinkedList<>();
+        selectedCards.add(null);
+        selectedCards.add(null);
+        selectedCards.add(null);
         deck = new LinkedList<>();
 
         fieldWidth = panelWidth / 7 * 3;
@@ -60,6 +63,7 @@ public class Player extends JPanel{
         for(Card c : deckP) {
             this.deck.addFirst(c);
             c.setPlayer(this);
+            c.setEnabled(turn);
         }
         System.out.println(deck.toString());
         System.out.println(selectedCards.toString());
@@ -75,20 +79,35 @@ public class Player extends JPanel{
                 c.setVisible(true);
                 if (!turn) c.coverCard();
                 deckPanel.add(c);
-                deckPanel.repaint();
+
             }
             i++;
         }
-        validate();
-        repaint();
+        deckPanel.repaint();
+    }
+
+    private void updateFieldView() {
+        int i = 0;
+        for(Card c : selectedCards) {
+            if(c != null) {
+                c.setBounds((10 * (i + 1)) + (cardWidth * i), 10, cardWidth, cardHeight);
+                c.setLayout(null);
+                c.setVisible(true);
+                if (!turn) c.coverCard();
+                field.add(c);
+
+            }
+            i++;
+        }
+        field.repaint();
     }
 
     public void waitTurn() {
         for(Card c : deck) {
-            c.setEnabled(false);
+            if(c != null) c.setEnabled(false);
         }
         for(Card c : selectedCards) {
-            c.setEnabled(false);
+            if(c != null) c.setEnabled(false);
         }
     }
 
@@ -124,44 +143,66 @@ public class Player extends JPanel{
     public void cardClicked(Card card) {
         if(this.board.isPhasePositioning()) {
             if(deck.contains(card)) {
-                if(selectedCards.size() == 3) {
+                if(numberOfElements(selectedCards) == 3) {
                     JOptionPane.showMessageDialog(null, "Non puoi selezionare altre carte!");
                 } else {
                     int i = 0;
                     for(Card c : deck) {
-                        if(c.getId() == card.getId()) {
-                            selectedCards.addLast(deck.get(i));
-                            break;
+                        if(c != null) {
+                            if(c.getId() == card.getId()) {
+                                int j = 0;
+                                for(Card z : selectedCards) {
+                                    if(z == null){
+                                        selectedCards.set(j, deck.get(i));
+                                        break;
+                                    }
+                                    j++;
+                                }
+                                break;
+                            }
                         }
                         i++;
                     }
+                    deckPanel.remove((Component) card);
                     deck.set(i, null);
                 }
             } else {
                 int i = 0;
                 for(Card c : selectedCards) {
                     boolean exit = false;
-                    if(c.getId() == card.getId()) {
-                        int j = 0;
-                        for(Card s : deck) {
-                            if(s == null) {
-                                exit = true;
+                    if(c != null) {
+                        if (c.getId() == card.getId()) {
+                            int j = 0;
+                            for (Card s : deck) {
+                                if (s == null) {
+                                    exit = true;
+                                    break;
+                                }
+                                j++;
+                            }
+                            if (exit) {
+                                deck.set(j, c);
                                 break;
                             }
-                            j++;
-                        }
-                        if(exit) {
-                            deck.add(j, c);
                         }
                     }
                     i++;
                 }
-                selectedCards.remove(i);
+                field.remove((Component) card);
+                selectedCards.set(i, null);
             }
         }
         System.out.println(deck.toString());
         System.out.println(selectedCards.toString());
         updateDeckView();
-        field.repaint();
+        updateFieldView();
+    }
+
+    private int numberOfElements(LinkedList<Card> cards) {
+        int i = 0;
+        for(Card c : cards)
+            if(c != null)
+                i++;
+        return i;
     }
 }

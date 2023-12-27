@@ -33,7 +33,10 @@ public abstract class Card extends JButton {
 
     @Override
     public boolean equals(Object o) {
-        Card temp = (Card) o;
+        Card temp;
+        if(o instanceof Card) temp = (Card) o;
+        else return false;
+        if(temp == null) return false;
         return this.getId() == temp.getId();
     }
 
