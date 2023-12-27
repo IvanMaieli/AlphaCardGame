@@ -9,6 +9,7 @@ public class Board extends JFrame {
     private JPanel buttonField;
     private JButton attackButton;
     private JButton deleteButton;
+    private JButton positioningButton;
     private LinkedList<Card> cards;
     private int cardWidth;
     private int cardHeight;
@@ -17,6 +18,8 @@ public class Board extends JFrame {
     private final Color stdColorCard = new Color(54, 56, 46);
     private final Color epicColorCard = new Color(218, 218, 217);
     private final Color legendaryColorCard = new Color(240, 100, 73);
+    private boolean phasePositioning = true;
+    private int actualTurn = 1;
 
     public Board() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -50,50 +53,61 @@ public class Board extends JFrame {
         this.add(buttonField);
 
         attackButton = new JButton("Attacca");
-        attackButton.setBounds(10, 10, 180, 85);
+        attackButton.setBounds(10, 10, buttonFieldWidth - 20, (buttonFieldHeight - 40) / 3);
         attackButton.addMouseListener(new BoardListener());
         attackButton.setFocusPainted(false);
         buttonField.add(attackButton);
         attackButton.setVisible(true);
 
+        positioningButton = new JButton("Schiera");
+        positioningButton.setBounds(10, 20 + (buttonFieldHeight - 40) / 3, 180, (buttonFieldHeight - 40) / 3);
+        positioningButton.addMouseListener(new BoardListener());
+        positioningButton.setFocusPainted(false);
+        buttonField.add(positioningButton);
+        positioningButton.setVisible(true);
+
         deleteButton = new JButton("Cancella tutto");
-        deleteButton.setBounds(10, 105, 180, 85);
+        deleteButton.setBounds(10, 30 + 2 * (buttonFieldHeight - 40) / 3, 180, (buttonFieldHeight - 40) / 3);
         deleteButton.addMouseListener(new BoardListener());
         deleteButton.setFocusPainted(false);
         buttonField.add(deleteButton);
         deleteButton.setVisible(true);
 
-        p1 = new Player(panelWidth, panelHeight, 1, Color.RED, true);
+        p1 = new Player(panelWidth, panelHeight, 1, Color.RED, true, this);
         p1.setBounds(10, 10, panelWidth, panelHeight);
         p1.setLayout(null);
         p1.setVisible(true);
         this.add(p1);
 
-        p2 = new Player(panelWidth, panelHeight, 2, Color.BLUE, false);
+        p2 = new Player(panelWidth, panelHeight, 2, Color.BLUE, false, this);
         p2.setBounds(10, panelHeight + 20, panelWidth, panelHeight);
         p2.setLayout(null);
         p2.setVisible(true);
         this.add(p2);
 
         mix();
-        p1.revalidate();
-        p1.repaint();
-        p2.revalidate();
-        p2.repaint();
-        validate();
+
+        chooseCards(p1, p2);
+
         repaint();
 
         this.setVisible(true);
+    }
+
+    private void chooseCards(Player p1, Player p2) {
+        p2.waitTurn();
+        p1.chooseCards(cards);
     }
 
     private void mix() {
         cards = new LinkedList<>();
 
         for (int i = 0; i < 40; i++) {
-            if(i < 5) cards.add(new Nebula(cardWidth, cardHeight, legendaryColorCard));
-            else if(i < 15) cards.add(new Gigatron(cardWidth, cardHeight, epicColorCard));
-            else if(i < 30) cards.add(new Dragon(cardWidth, cardHeight, stdColorCard));
-            else cards.add(new Wolf(cardWidth, cardHeight, stdColorCard));
+            if(i < 5) cards.add(new Nebula(i, cardWidth, cardHeight, legendaryColorCard));
+            else if(i < 15) cards.add(new Gigatron(i, cardWidth, cardHeight, epicColorCard));
+            else if(i < 30) cards.add(new Dragon(i, cardWidth, cardHeight, stdColorCard));
+            else if(i < 35) cards.add(new NanoMech(i, cardWidth, cardHeight, stdColorCard));
+            else cards.add(new Wolf(i, cardWidth, cardHeight, stdColorCard));
         }
 
         Collections.shuffle(cards);
@@ -108,14 +122,27 @@ public class Board extends JFrame {
 
         p1.giveCards(deckP1);
         p2.giveCards(deckP2);
-        p1.revalidate();
-        p1.repaint();
-        p2.revalidate();
-        p2.repaint();
+
         repaint();
     }
 
-    private class BoardListener implements MouseListener {
+    public boolean isPhasePositioning() {
+        return phasePositioning;
+    }
+
+    public void setPhasePositioning(boolean phasePositioning) {
+        this.phasePositioning = phasePositioning;
+    }
+
+    public int getActualTurn() {
+        return actualTurn;
+    }
+
+    public void setActualTurn(int actualTurn) {
+        this.actualTurn = actualTurn;
+    }
+
+    public class BoardListener implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {}
 
