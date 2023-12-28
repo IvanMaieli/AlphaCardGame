@@ -10,38 +10,51 @@ public class Menu extends JFrame {
     private Rule rule;
 
     public Menu() {
-        this.setTitle("Menu CyberAttack");
+        this.setTitle("Deep Space launcher");
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
 
-        int height = 200;
         int width = 400;
+        int height = 160;
 
+        this.getContentPane().setBackground(new Color(199, 81, 70));
         this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height);
         this.setVisible(true);
         this.setLayout(null);
         this.setResizable(false);
-        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        int buttonHeight = 68;
-        int buttonWidth = (int) (380 - screenWidth / 100 * 0.8);
+
+        int buttonWidth = 380;
+        int buttonHeight = 50;
+
+        Font font = new Font("Monospaced", Font.BOLD, 16);
 
         play = new JButton("Play");
+        play.setBackground(new Color(28, 49, 68));
+        play.setForeground(new Color(235, 212, 203));
+        play.setFont(font);
         play.setBounds(10, 10, buttonWidth, buttonHeight);
-        play.setVisible(true);
+        play.setLayout(null);
         play.setFocusPainted(false);
         play.addMouseListener(new MenuListener());
+        play.setVisible(true);
         add(play);
 
         rules = new JButton("Rules");
+        rules.setBackground(new Color(28, 49, 68));
+        rules.setForeground(new Color(235, 212, 203));
+        rules.setFont(font);
         rules.setBounds(10, 20 + buttonHeight, buttonWidth, buttonHeight);
-        rules.setVisible(true);
+        play.setLayout(null);
         rules.setFocusPainted(false);
         rules.addMouseListener(new MenuListener());
+        rules.setVisible(true);
         add(rules);
+
     }
 
     private class MenuListener implements MouseListener {

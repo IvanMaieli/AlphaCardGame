@@ -100,7 +100,7 @@ public abstract class CharacterCard extends Card {
         img.setIcon(new ImageIcon(backImg));
         img.setBounds(0,0, cardWidth, cardHeight);
         img.setVisible(true);
-        //this.setEnabled(false);
+        this.setEnabled(false);
     }
 
     @Override
@@ -110,7 +110,7 @@ public abstract class CharacterCard extends Card {
         img.setIcon(new ImageIcon(frontImg));
         img.setBounds((cardWidth - img.getIcon().getIconWidth()) / 2 - 2, (int) (cardHeight * 0.2), cardWidth, (int) (cardHeight - (cardHeight * 0.20) - (cardHeight* 0.15)));
         img.setVisible(true);
-        //this.setEnabled(true);
+        this.setEnabled(true);
     }
 
     public String getName() {

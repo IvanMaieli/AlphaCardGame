@@ -37,6 +37,7 @@ public class Board extends JFrame {
         cardWidth = (int) (panelWidth - 80) / 7;
 
         this.setTitle("CyberAttack");
+        this.getContentPane().setBackground(new Color(232, 241, 242));
         this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height);
         this.setLayout(null);
         this.setResizable(false);
@@ -48,6 +49,7 @@ public class Board extends JFrame {
         Font buttonFont = new Font("Monospaced", Font.BOLD, 16);
 
         buttonField = new JPanel();
+        buttonField.setBackground(new Color(199, 81, 70));
         buttonField.setBounds((int)((width - screenWidth / 100 * 0.8) / 7 * 5.5), (height - buttonFieldHeight + 14) / 2, buttonFieldWidth, buttonFieldHeight - 65);
         buttonField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         buttonField.setLayout(null);
@@ -154,7 +156,6 @@ public class Board extends JFrame {
                 if(actualTurn < 3) {
                     if (actualTurn % 2 == 0) {
                         if(p2.checkSelectedCards()) {
-                            System.out.println("Ci sono 3 carte");
                             actualTurn++;
                             p1.changeTurn();
                             p2.changeTurn();
@@ -162,7 +163,6 @@ public class Board extends JFrame {
                         }
                     } else {
                         if(p1.checkSelectedCards()) {
-                            System.out.println("Ci sono 3 carte");
                             actualTurn++;
                             p1.changeTurn();
                             p2.changeTurn();
