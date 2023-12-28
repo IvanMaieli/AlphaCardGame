@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+
 public abstract class CharacterCard extends Card {
 
     private String name;
