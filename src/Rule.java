@@ -8,7 +8,6 @@ public class Rule extends JFrame {
     public Rule() {
         this.setTitle("Rules");
         this.setBounds(0, 0, icon.getIconWidth(), icon.getIconHeight());
-        this.setLayout(null);
         this.setResizable(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -16,7 +15,6 @@ public class Rule extends JFrame {
         img = new JLabel(icon);
         img.setBounds(0, 0, icon.getIconWidth(), icon.getIconHeight());
         img.setVisible(true);
-        img.setLayout(null);
         this.add(img);
 
     }

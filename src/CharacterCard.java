@@ -61,22 +61,22 @@ public abstract class CharacterCard extends Card {
         img.setVisible(true);
         this.add(img);
 
-        int labelWidth = (int) (panelSpecs.getWidth() * 0.4);
+        int labelWidth = (int) (panelSpecs.getWidth() * 0.42);
         int labelHeight = 30;
 
-        attackLabel = new JLabel("ATT: " + attack);
+        attackLabel = new JLabel("ATT:" + attack);
         attackLabel.setForeground(new Color(235, 212, 203));
         attackLabel.setFont(fontCard);
         attackLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        attackLabel.setBounds((int)(cardWidth * 0.08), (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        attackLabel.setBounds((int)(cardWidth * 0.06), (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         attackLabel.setVisible(true);
         panelSpecs.add(attackLabel);
 
-        defLabel = new JLabel("DEF: " + defense);
+        defLabel = new JLabel("DEF:" + defense);
         defLabel.setForeground(new Color(235, 212, 203));
         defLabel.setFont(fontCard);
         defLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        defLabel.setBounds(panelSpecs.getWidth() - (labelWidth + (int)(cardWidth * 0.08)) - 1, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        defLabel.setBounds(panelSpecs.getWidth() - (labelWidth + (int)(cardWidth * 0.06)) - 2, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         defLabel.setVisible(true);
         panelSpecs.add(defLabel);
 
