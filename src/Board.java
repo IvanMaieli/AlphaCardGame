@@ -46,7 +46,7 @@ public class Board extends JFrame {
         int buttonFieldWidth = 200;
 
         buttonField = new JPanel();
-        buttonField.setBounds((int)((width - screenWidth / 100 * 0.8) / 7 * 5.5), (height - buttonFieldHeight - 32) / 2, buttonFieldWidth, buttonFieldHeight);
+        buttonField.setBounds((int)((width - screenWidth / 100 * 0.8) / 7 * 5.5), (height - buttonFieldHeight + 14) / 2, buttonFieldWidth, buttonFieldHeight - 65);
         buttonField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         buttonField.setLayout(null);
         buttonField.setVisible(true);
