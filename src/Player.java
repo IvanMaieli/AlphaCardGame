@@ -39,6 +39,7 @@ public class Player extends JPanel{
         deckPanel = new JPanel();
         deckPanel.setBounds(10, 10 + fieldHeight * (p - 1), deckWidth, fieldHeight);
         deckPanel.setBorder(BorderFactory.createLineBorder(color, 3));
+        deckPanel.setBackground(color);
         deckPanel.setLayout(null);
         deckPanel.setVisible(true);
         this.add(deckPanel);
@@ -46,6 +47,7 @@ public class Player extends JPanel{
         field = new JPanel();
         field.setBounds((panelWidth - fieldWidth) / 2, (10 * 2) + (fieldHeight) - (fieldHeight + 20) * (p - 1), fieldWidth, fieldHeight);
         field.setBorder(BorderFactory.createLineBorder(color, 3));
+        field.setBackground(color);
         field.setLayout(null);
         field.setVisible(true);
         this.add(field);

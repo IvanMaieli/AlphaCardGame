@@ -16,8 +16,8 @@ public class Board extends JFrame {
     private Player p1;
     private Player p2;
     private final Color stdColorCard = new Color(28, 49, 68);
-    private final Color epicColorCard = new Color(250, 199, 72);
-    private final Color legendaryColorCard = new Color(240, 100, 73);
+    private final Color epicColorCard = new Color(241, 233, 219);
+    private final Color legendaryColorCard = new Color(250, 199, 72);
     private boolean phasePositioning = true;
     private int actualTurn = 1;
 
@@ -41,7 +41,7 @@ public class Board extends JFrame {
         this.setLayout(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
         int buttonFieldHeight = 200;
         int buttonFieldWidth = 200;
 
@@ -53,6 +53,8 @@ public class Board extends JFrame {
         this.add(buttonField);
 
         attackButton = new JButton("Attacca");
+        attackButton.setBackground(new Color(28, 49, 68));
+        attackButton.setForeground(new Color(235, 212, 203));
         attackButton.setBounds(10, 10, buttonFieldWidth - 20, (buttonFieldHeight - 40) / 3);
         attackButton.addMouseListener(new BoardListener());
         attackButton.setFocusPainted(false);
@@ -60,6 +62,8 @@ public class Board extends JFrame {
         attackButton.setVisible(true);
 
         positioningButton = new JButton("Schiera");
+        positioningButton.setBackground(new Color(28, 49, 68));
+        positioningButton.setForeground(new Color(235, 212, 203));
         positioningButton.setBounds(10, 20 + (buttonFieldHeight - 40) / 3, 180, (buttonFieldHeight - 40) / 3);
         positioningButton.addMouseListener(new BoardListener());
         positioningButton.setFocusPainted(false);
@@ -67,13 +71,13 @@ public class Board extends JFrame {
         positioningButton.setVisible(true);
 
 
-        p1 = new Player(panelWidth, panelHeight, 1, Color.RED, true, this);
+        p1 = new Player(panelWidth, panelHeight, 1, new Color(199, 81, 70), true, this);
         p1.setBounds(10, 10, panelWidth, panelHeight);
         p1.setLayout(null);
         p1.setVisible(true);
         this.add(p1);
 
-        p2 = new Player(panelWidth, panelHeight, 2, Color.BLUE, false, this);
+        p2 = new Player(panelWidth, panelHeight, 2, new Color(11, 57, 84), false, this);
         p2.setBounds(10, panelHeight + 20, panelWidth, panelHeight);
         p2.setLayout(null);
         p2.setVisible(true);
