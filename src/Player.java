@@ -28,7 +28,7 @@ public class Player extends JPanel {
         this.turn = turn;
         this.board = board;
         this.setSize(panelWidth, panelHeight);
-        this.setBackground(new Color(232, 241, 242));
+        this.setBackground(new Color(42, 45, 52));
         this.setLayout(null);
 
         selectedCards = new LinkedList<>();
@@ -44,7 +44,7 @@ public class Player extends JPanel {
 
         deckPanel = new JPanel();
         deckPanel.setBounds(10, 10 + fieldHeight * (p - 1), deckWidth, fieldHeight);
-        deckPanel.setBorder(BorderFactory.createLineBorder(new Color(28, 49, 68), 3));
+        deckPanel.setBorder(BorderFactory.createLineBorder(new Color(184,48,175), 3));
         deckPanel.setBackground(color);
         deckPanel.setLayout(null);
         deckPanel.setVisible(true);
@@ -53,7 +53,7 @@ public class Player extends JPanel {
         field = new JPanel();
         field.setBounds((panelWidth - fieldWidth) / 2, (10 * 2) + (fieldHeight) - (fieldHeight + 20) * (p - 1),
                 fieldWidth, fieldHeight);
-        field.setBorder(BorderFactory.createLineBorder(new Color(28, 49, 68), 3));
+        field.setBorder(BorderFactory.createLineBorder(new Color(184,48,175), 3));
         field.setBackground(color);
         field.setLayout(null);
         field.setVisible(true);
@@ -62,14 +62,14 @@ public class Player extends JPanel {
         fieldName = new JPanel();
         fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 6, (10 * 2) + (fieldHeight) - (fieldHeight + 20) * (p - 1),
                 fieldWidth / 6, fieldHeight / 6);
-        fieldName.setBackground(new Color(28, 49, 68));
+        fieldName.setBackground(new Color(184,48,175));
         fieldName.setLayout(null);
         fieldName.setVisible(true);
         this.add(fieldName);
 
         JLabel pName = new JLabel("PLAYER " + p);
         pName.setFont(font);
-        pName.setForeground(Color.WHITE);
+        pName.setForeground(new Color(235, 212, 203));
         pName.setBounds(10, (fieldName.getHeight() - 40) / 2, 150, 40);
         pName.setLayout(null);
         pName.setVisible(true);
@@ -202,7 +202,6 @@ public class Player extends JPanel {
                         }
                         i++;
                     }
-
                 }
             }
             updateView();

@@ -20,12 +20,12 @@ public class Menu extends JFrame {
         int width = 400;
         int height = 160;
 
-        this.getContentPane().setBackground(new Color(199, 81, 70));
+        this.getContentPane().setBackground(new Color(42, 45, 52));
         this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height);
-        this.setVisible(true);
         this.setLayout(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
 
 
         int buttonWidth = 380;
@@ -34,7 +34,7 @@ public class Menu extends JFrame {
         Font font = new Font("Monospaced", Font.BOLD, 16);
 
         play = new JButton("Play");
-        play.setBackground(new Color(28, 49, 68));
+        play.setBackground(new Color(42, 45, 52));
         play.setForeground(new Color(235, 212, 203));
         play.setFont(font);
         play.setBounds(10, 10, buttonWidth, buttonHeight);
@@ -45,7 +45,7 @@ public class Menu extends JFrame {
         add(play);
 
         rules = new JButton("Rules");
-        rules.setBackground(new Color(28, 49, 68));
+        rules.setBackground(new Color(42, 45, 52));
         rules.setForeground(new Color(235, 212, 203));
         rules.setFont(font);
         rules.setBounds(10, 20 + buttonHeight, buttonWidth, buttonHeight);

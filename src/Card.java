@@ -55,15 +55,16 @@ public abstract class Card extends JButton {
         @Override
         public void mouseEntered(MouseEvent mouseEvent) {
             Component[] components = getComponents();
-            for(Component c : components)
-                c.setBackground(new Color(42, 98, 143));
+            for(Component c : components) {
+                c.setBackground(new Color(184,48,175));
+            }
         }
 
         @Override
         public void mouseExited(MouseEvent mouseEvent) {
             Component[] components = getComponents();
             for(Component c : components)
-                c.setBackground(new Color(28, 49, 68));
+                c.setBackground(new Color(42, 45, 52));
         }
 
     }

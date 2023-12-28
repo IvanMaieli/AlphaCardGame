@@ -15,7 +15,7 @@ public class Board extends JFrame {
     private int cardHeight;
     private Player p1;
     private Player p2;
-    private final Color stdColorCard = new Color(28, 49, 68);
+    private final Color stdColorCard = new Color(42, 45, 52);
     private final Color epicColorCard = new Color(241, 233, 219);
     private final Color legendaryColorCard = new Color(250, 199, 72);
     private boolean phasePositioning = true;
@@ -37,8 +37,8 @@ public class Board extends JFrame {
         cardWidth = (int) (panelWidth - 80) / 7;
 
         this.setTitle("CyberAttack");
-        this.getContentPane().setBackground(new Color(232, 241, 242));
-        this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height);
+        this.getContentPane().setBackground(stdColorCard);
+        this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width - 12, height - 25);
         this.setLayout(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,42 +49,44 @@ public class Board extends JFrame {
         Font buttonFont = new Font("Monospaced", Font.BOLD, 16);
 
         buttonField = new JPanel();
-        buttonField.setBackground(new Color(199, 81, 70));
+        buttonField.setBackground(new Color(42, 45, 52));
         buttonField.setBounds((int)((width - screenWidth / 100 * 0.8) / 7 * 5.5), (height - buttonFieldHeight + 14) / 2, buttonFieldWidth, buttonFieldHeight - 65);
-        buttonField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        buttonField.setBorder(BorderFactory.createLineBorder(new Color(184,48,175), 3));
         buttonField.setLayout(null);
         buttonField.setVisible(true);
         this.add(buttonField);
 
         attackButton = new JButton("ATTACCA");
-        attackButton.setBackground(new Color(28, 49, 68));
+        attackButton.setBackground(new Color(42, 45, 52));
         attackButton.setForeground(new Color(235, 212, 203));
         attackButton.setFont(buttonFont);
         attackButton.setBounds(10, 10, buttonFieldWidth - 20, (buttonFieldHeight - 40) / 3);
         attackButton.addMouseListener(new BoardListener());
         attackButton.setFocusPainted(false);
         attackButton.setEnabled(false);
+        attackButton.setRolloverEnabled(false);
         buttonField.add(attackButton);
         attackButton.setVisible(true);
 
         positioningButton = new JButton("SCHIERA");
-        positioningButton.setBackground(new Color(28, 49, 68));
+        positioningButton.setBackground(new Color(42, 45, 52));
         positioningButton.setForeground(new Color(235, 212, 203));
         positioningButton.setFont(buttonFont);
         positioningButton.setBounds(10, 20 + (buttonFieldHeight - 40) / 3, 180, (buttonFieldHeight - 40) / 3);
         positioningButton.addMouseListener(new BoardListener());
         positioningButton.setFocusPainted(false);
+        positioningButton.setRolloverEnabled(false);
         buttonField.add(positioningButton);
         positioningButton.setVisible(true);
 
 
-        p1 = new Player(panelWidth, panelHeight, 1, new Color(199, 81, 70), true, this);
+        p1 = new Player(panelWidth, panelHeight, 1, new Color(145, 125, 140), true, this);
         p1.setBounds(10, 10, panelWidth, panelHeight);
         p1.setLayout(null);
         p1.setVisible(true);
         this.add(p1);
 
-        p2 = new Player(panelWidth, panelHeight, 2, new Color(245, 105, 96), false, this);
+        p2 = new Player(panelWidth, panelHeight, 2, new Color(145, 125, 140), false, this);
         p2.setBounds(10, panelHeight + 20, panelWidth, panelHeight);
         p2.setLayout(null);
         p2.setVisible(true);
@@ -110,10 +112,12 @@ public class Board extends JFrame {
 
         for (int i = 0; i < 40; i++) {
             if(i < 2) cards.add(new Nebula(i, cardWidth, cardHeight, legendaryColorCard));
-            else if(i < 7) cards.add(new Gigatron(i, cardWidth, cardHeight, epicColorCard));
-            else if(i < 15) cards.add(new Dragon(i, cardWidth, cardHeight, stdColorCard));
-            else if(i < 22) cards.add(new NanoMech(i, cardWidth, cardHeight, stdColorCard));
-            else if(i < 30) cards.add(new Wolf(i, cardWidth, cardHeight, stdColorCard));
+            else if(i < 4) cards.add(new Nightmare(i, cardWidth, cardHeight, legendaryColorCard));
+            else if(i < 8) cards.add(new Gigaorso(i, cardWidth, cardHeight, epicColorCard));
+            else if(i < 12) cards.add(new Gigaworm(i, cardWidth, cardHeight, epicColorCard));
+            else if(i < 15) cards.add(new AntsHorde(i, cardWidth, cardHeight, stdColorCard));
+            else if(i < 22) cards.add(new ElRaton(i, cardWidth, cardHeight, stdColorCard));
+            else if(i < 30) cards.add(new CyberWolf(i, cardWidth, cardHeight, stdColorCard));
             else cards.add(new Spaceman(i, cardWidth, cardHeight, stdColorCard));
         }
 

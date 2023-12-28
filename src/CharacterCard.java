@@ -10,8 +10,8 @@ public abstract class CharacterCard extends Card {
     private Image frontImg;
     private Image backImg;
     private JLabel img;
-    private final Color stdColorCard = new Color(28, 49, 68);
-    private Color color; // (255, 186, 8) = leggendaria, (208, 0, 0) = epica, colore standard = comune
+    private final Color stdColorCard = new Color(42, 45, 52);
+    private Color color;
     private JPanel panelSpecs;
     private JPanel panelName;
     private JLabel attackLabel;
@@ -36,8 +36,9 @@ public abstract class CharacterCard extends Card {
         Font fontCard = new Font("Monospaced", Font.BOLD, 16);
 
         this.setSize(cardWidth, cardHeight);
+        this.setBorder(BorderFactory.createRaisedBevelBorder());
         this.setLayout(null);
-        this.setRolloverEnabled(false);
+        this.setBorderPainted(false);
         this.setBackground(color);
         this.addMouseListener(new CardListener());
         this.setVisible(true);
@@ -45,6 +46,7 @@ public abstract class CharacterCard extends Card {
         panelSpecs = new JPanel();
         panelSpecs.setBounds(0,0,cardWidth, (int)(cardHeight * 0.2));
         panelSpecs.setBackground(stdColorCard);
+        panelSpecs.setBorder(BorderFactory.createRaisedBevelBorder());
         panelSpecs.setLayout(null);
         panelSpecs.setVisible(true);
         this.add(panelSpecs);
@@ -52,6 +54,7 @@ public abstract class CharacterCard extends Card {
         panelName = new JPanel();
         panelName.setBounds(0, (int)(cardHeight - 1.35 * (cardHeight * 0.15)), cardWidth, (int)(cardHeight * 0.15) + 1);
         panelName.setBackground(stdColorCard);
+        panelName.setBorder(BorderFactory.createRaisedBevelBorder());
         panelName.setFont(fontCard);
         panelName.setLayout(null);
         panelName.setVisible(true);
@@ -87,7 +90,7 @@ public abstract class CharacterCard extends Card {
         nameLabel.setForeground(new Color(235, 212, 203));
         nameLabel.setFont(fontCard);
         nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
-        nameLabel.setBounds((panelName.getWidth() - nameLabelWidth) / 2, (panelName.getHeight() - labelHeight) / 2 - 1 , nameLabelWidth, labelHeight);
+        nameLabel.setBounds((panelName.getWidth() - nameLabelWidth) / 2, (panelName.getHeight() - labelHeight) / 2 , nameLabelWidth, labelHeight);
         nameLabel.setVisible(true);
         panelName.add(nameLabel);
 
