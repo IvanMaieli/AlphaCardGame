@@ -32,7 +32,7 @@ public abstract class CharacterCard extends Card {
         this.cardWidth = cardWidth;
         this.cardHeight = cardHeight;
 
-        Font fontCard = new Font("Serif", Font.BOLD, 16);
+        Font fontCard = new Font("Monospaced", Font.BOLD, 16);
 
         this.setSize(cardWidth, cardHeight);
         this.setLayout(null);
@@ -68,7 +68,7 @@ public abstract class CharacterCard extends Card {
         attackLabel.setForeground(new Color(235, 212, 203));
         attackLabel.setFont(fontCard);
         attackLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        attackLabel.setBounds((int)(cardWidth * 0.085), (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        attackLabel.setBounds((int)(cardWidth * 0.08), (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         attackLabel.setVisible(true);
         panelSpecs.add(attackLabel);
 
@@ -76,7 +76,7 @@ public abstract class CharacterCard extends Card {
         defLabel.setForeground(new Color(235, 212, 203));
         defLabel.setFont(fontCard);
         defLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        defLabel.setBounds(panelSpecs.getWidth() - (labelWidth + (int)(cardWidth * 0.085)) - 2, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        defLabel.setBounds(panelSpecs.getWidth() - (labelWidth + (int)(cardWidth * 0.08)) - 1, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
         defLabel.setVisible(true);
         panelSpecs.add(defLabel);
 

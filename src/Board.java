@@ -66,12 +66,6 @@ public class Board extends JFrame {
         buttonField.add(positioningButton);
         positioningButton.setVisible(true);
 
-        deleteButton = new JButton("Cancella tutto");
-        deleteButton.setBounds(10, 30 + 2 * (buttonFieldHeight - 40) / 3, 180, (buttonFieldHeight - 40) / 3);
-        deleteButton.addMouseListener(new BoardListener());
-        deleteButton.setFocusPainted(false);
-        buttonField.add(deleteButton);
-        deleteButton.setVisible(true);
 
         p1 = new Player(panelWidth, panelHeight, 1, Color.RED, true, this);
         p1.setBounds(10, 10, panelWidth, panelHeight);
@@ -102,11 +96,12 @@ public class Board extends JFrame {
         cards = new LinkedList<>();
 
         for (int i = 0; i < 40; i++) {
-            if(i < 5) cards.add(new Nebula(i, cardWidth, cardHeight, legendaryColorCard));
-            else if(i < 15) cards.add(new Gigatron(i, cardWidth, cardHeight, epicColorCard));
-            else if(i < 30) cards.add(new Dragon(i, cardWidth, cardHeight, stdColorCard));
-            else if(i < 35) cards.add(new NanoMech(i, cardWidth, cardHeight, stdColorCard));
-            else cards.add(new Wolf(i, cardWidth, cardHeight, stdColorCard));
+            if(i < 2) cards.add(new Nebula(i, cardWidth, cardHeight, legendaryColorCard));
+            else if(i < 7) cards.add(new Gigatron(i, cardWidth, cardHeight, epicColorCard));
+            else if(i < 15) cards.add(new Dragon(i, cardWidth, cardHeight, stdColorCard));
+            else if(i < 22) cards.add(new NanoMech(i, cardWidth, cardHeight, stdColorCard));
+            else if(i < 30) cards.add(new Wolf(i, cardWidth, cardHeight, stdColorCard));
+            else cards.add(new Spaceman(i, cardWidth, cardHeight, stdColorCard));
         }
 
         Collections.shuffle(cards);

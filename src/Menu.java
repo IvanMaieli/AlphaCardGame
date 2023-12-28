@@ -7,6 +7,7 @@ public class Menu extends JFrame {
     private JButton play;
     private JButton rules;
     private Board board;
+    private Rule rule;
 
     public Menu() {
         this.setTitle("Menu CyberAttack");
@@ -39,6 +40,7 @@ public class Menu extends JFrame {
         rules.setBounds(10, 20 + buttonHeight, buttonWidth, buttonHeight);
         rules.setVisible(true);
         rules.setFocusPainted(false);
+        rules.addMouseListener(new MenuListener());
         add(rules);
     }
 
@@ -48,6 +50,10 @@ public class Menu extends JFrame {
             if(mouseEvent.getSource() == play) {
                 board = new Board();
                 dispose();
+            }
+
+            if(mouseEvent.getSource() == rules) {
+                rule = new Rule();
             }
         }
 
