@@ -40,6 +40,7 @@ public class Menu extends JFrame {
         play.setBounds(10, 10, buttonWidth, buttonHeight);
         play.setLayout(null);
         play.setFocusPainted(false);
+        play.setRolloverEnabled(false);
         play.addMouseListener(new MenuListener());
         play.setVisible(true);
         add(play);
@@ -51,6 +52,7 @@ public class Menu extends JFrame {
         rules.setBounds(10, 20 + buttonHeight, buttonWidth, buttonHeight);
         play.setLayout(null);
         rules.setFocusPainted(false);
+        rules.setRolloverEnabled(false);
         rules.addMouseListener(new MenuListener());
         rules.setVisible(true);
         add(rules);
