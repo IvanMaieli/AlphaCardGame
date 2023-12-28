@@ -37,9 +37,10 @@ public abstract class CharacterCard extends Card {
 
         this.setSize(cardWidth, cardHeight);
         this.setLayout(null);
-        this.setVisible(true);
+        this.setRolloverEnabled(false);
         this.setBackground(color);
         this.addMouseListener(new CardListener());
+        this.setVisible(true);
 
         panelSpecs = new JPanel();
         panelSpecs.setBounds(0,0,cardWidth, (int)(cardHeight * 0.2));
@@ -99,6 +100,7 @@ public abstract class CharacterCard extends Card {
         img.setIcon(new ImageIcon(backImg));
         img.setBounds(0,0, cardWidth, cardHeight);
         img.setVisible(true);
+        //this.setEnabled(false);
     }
 
     @Override
@@ -106,8 +108,9 @@ public abstract class CharacterCard extends Card {
         panelSpecs.setVisible(true);
         panelName.setVisible(true);
         img.setIcon(new ImageIcon(frontImg));
-        img.setBounds((cardWidth - img.getIcon().getIconWidth()) / 2 - 2, (int) (cardHeight * 0.2), cardWidth,(int) (cardHeight - (cardHeight * 0.20) - (cardHeight* 0.15)));
+        img.setBounds((cardWidth - img.getIcon().getIconWidth()) / 2 - 2, (int) (cardHeight * 0.2), cardWidth, (int) (cardHeight - (cardHeight * 0.20) - (cardHeight* 0.15)));
         img.setVisible(true);
+        //this.setEnabled(true);
     }
 
     public String getName() {

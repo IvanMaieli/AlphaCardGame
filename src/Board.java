@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class Board extends JFrame {
     private JPanel buttonField;
-    private JButton attackButton;
+    public JButton attackButton;
     private JButton deleteButton;
     private JButton positioningButton;
     private LinkedList<Card> cards;
@@ -45,6 +45,8 @@ public class Board extends JFrame {
         int buttonFieldHeight = 200;
         int buttonFieldWidth = 200;
 
+        Font buttonFont = new Font("Monospaced", Font.BOLD, 16);
+
         buttonField = new JPanel();
         buttonField.setBounds((int)((width - screenWidth / 100 * 0.8) / 7 * 5.5), (height - buttonFieldHeight + 14) / 2, buttonFieldWidth, buttonFieldHeight - 65);
         buttonField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
@@ -52,18 +54,21 @@ public class Board extends JFrame {
         buttonField.setVisible(true);
         this.add(buttonField);
 
-        attackButton = new JButton("Attacca");
+        attackButton = new JButton("ATTACCA");
         attackButton.setBackground(new Color(28, 49, 68));
         attackButton.setForeground(new Color(235, 212, 203));
+        attackButton.setFont(buttonFont);
         attackButton.setBounds(10, 10, buttonFieldWidth - 20, (buttonFieldHeight - 40) / 3);
         attackButton.addMouseListener(new BoardListener());
         attackButton.setFocusPainted(false);
+        attackButton.setEnabled(false);
         buttonField.add(attackButton);
         attackButton.setVisible(true);
 
-        positioningButton = new JButton("Schiera");
+        positioningButton = new JButton("SCHIERA");
         positioningButton.setBackground(new Color(28, 49, 68));
         positioningButton.setForeground(new Color(235, 212, 203));
+        positioningButton.setFont(buttonFont);
         positioningButton.setBounds(10, 20 + (buttonFieldHeight - 40) / 3, 180, (buttonFieldHeight - 40) / 3);
         positioningButton.addMouseListener(new BoardListener());
         positioningButton.setFocusPainted(false);
@@ -77,7 +82,7 @@ public class Board extends JFrame {
         p1.setVisible(true);
         this.add(p1);
 
-        p2 = new Player(panelWidth, panelHeight, 2, new Color(11, 57, 84), false, this);
+        p2 = new Player(panelWidth, panelHeight, 2, new Color(245, 105, 96), false, this);
         p2.setBounds(10, panelHeight + 20, panelWidth, panelHeight);
         p2.setLayout(null);
         p2.setVisible(true);
@@ -92,7 +97,9 @@ public class Board extends JFrame {
         this.setVisible(true);
     }
 
+
     private void chooseCards(Player p1, Player p2) {
+        p2.waitTurn();
         p1.chooseCards(cards);
     }
 
@@ -142,7 +149,31 @@ public class Board extends JFrame {
 
     public class BoardListener implements MouseListener {
         @Override
-        public void mouseClicked(MouseEvent mouseEvent) {}
+        public void mouseClicked(MouseEvent mouseEvent) {
+            if(mouseEvent.getSource() == positioningButton) {
+                if(actualTurn < 3) {
+                    if (actualTurn % 2 == 0) {
+                        if(p2.checkSelectedCards()) {
+                            System.out.println("Ci sono 3 carte");
+                            actualTurn++;
+                            p1.changeTurn();
+                            p2.changeTurn();
+                            chooseCards(p1, p2);
+                        }
+                    } else {
+                        if(p1.checkSelectedCards()) {
+                            System.out.println("Ci sono 3 carte");
+                            actualTurn++;
+                            p1.changeTurn();
+                            p2.changeTurn();
+                            chooseCards(p2, p1);
+                        }
+                    }
+                } else {
+                    phasePositioning = !phasePositioning;
+                }
+            }
+        }
 
         @Override
         public void mousePressed(MouseEvent mouseEvent) {}

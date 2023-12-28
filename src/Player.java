@@ -6,7 +6,7 @@ public class Player extends JPanel{
 
     private JPanel deckPanel;
     private JPanel field;
-    private LinkedList<Card> deck;
+    public LinkedList<Card> deck;
     private LinkedList<Card> selectedCards;
     private int panelWidth;
     private int panelHeight;
@@ -55,7 +55,6 @@ public class Player extends JPanel{
         cardHeight = fieldHeight - 20;
         cardWidth = (int) (deckWidth - 80) / 7;
 
-
         validate();
         repaint();
         this.setVisible(true);
@@ -65,37 +64,31 @@ public class Player extends JPanel{
         for(Card c : deckP) {
             this.deck.addFirst(c);
             c.setPlayer(this);
-            c.setEnabled(turn);
         }
-        System.out.println(deck.toString());
-        System.out.println(selectedCards.toString());
-        updateDeckView();
+        updateView();
     }
 
-    private void updateDeckView() {
+    private void updateView() {
         int i = 0;
         for(Card c : deck) {
             if(c != null) {
                 c.setBounds((10 * (i + 1)) + (cardWidth * i), 10, cardWidth, cardHeight);
                 c.setLayout(null);
                 c.setVisible(true);
-                if (!turn) c.coverCard();
+                //if (!turn) c.coverCard();
                 deckPanel.add(c);
 
             }
             i++;
         }
         deckPanel.repaint();
-    }
-
-    private void updateFieldView() {
-        int i = 0;
+        i = 0;
         for(Card c : selectedCards) {
             if(c != null) {
                 c.setBounds((10 * (i + 1)) + (cardWidth * i), 10, cardWidth, cardHeight);
                 c.setLayout(null);
                 c.setVisible(true);
-                if (!turn) c.coverCard();
+//                if (!turn) c.coverCard();
                 field.add(c);
 
             }
@@ -105,32 +98,37 @@ public class Player extends JPanel{
     }
 
     public void chooseCards(LinkedList<Card> cards) {
-        LinkedList<Card> tempCards = new LinkedList<>();
         int i = 0;
         int j = 0;
         for(Card c : selectedCards) {
-            if(!(c == null)) tempCards.add(selectedCards.remove(i));
+            if(c != null) {
+                Card cTemp = c;
+                j = 0;
+                for(Card c2 : deck) {
+                    if(c2 == null){
+                        deck.set(j, cTemp);
+                        field.remove((Component) selectedCards.get(i));
+                        selectedCards.set(i, null);
+                        break;
+                    }
+                    j++;
+                }
+            }
             i++;
         }
 
         i = 0;
         for(Card c : deck) {
-            if(c == null) {
-                if(i < tempCards.size()){
-                    deck.set(j, tempCards.removeFirst());
-                    i++;
-                }
-                else {
-                    deck.set(j, cards.removeFirst());
-                    deck.get(j).setPlayer(this);
-                }
+            if (c == null) {
+                deck.set(i, cards.removeFirst());
+                deck.get(i).setPlayer(this);
             }
-            j++;
+            i++;
         }
         for(Card c : deck) {
-            c.setEnabled(true);
             c.showCard();
         }
+        updateView();
     }
 
     public void cardClicked(Card card) {
@@ -176,21 +174,23 @@ public class Player extends JPanel{
                                 }
                                 if (exit) {
                                     deck.set(j, c);
+                                    field.remove((Component) card);
+                                    selectedCards.set(i, null);
                                     break;
                                 }
                             }
                         }
                         i++;
                     }
-                    field.remove((Component) card);
-                    selectedCards.set(i, null);
+
                 }
             }
-            System.out.println(deck.toString());
-            System.out.println(selectedCards.toString());
-            updateDeckView();
-            updateFieldView();
+            updateView();
         }
+    }
+
+    public void changeTurn() {
+        this.turn = !turn;
     }
 
     private int numberOfElements(LinkedList<Card> cards) {
@@ -199,5 +199,25 @@ public class Player extends JPanel{
             if(c != null)
                 i++;
         return i;
+    }
+
+    public void waitTurn() {
+        for(Card c : deck)
+            if(c != null)
+                c.coverCard();
+        updateView();
+    }
+
+    public boolean isTurn() {
+        return turn;
+    }
+
+    public boolean checkSelectedCards() {
+        System.out.println(numberOfElements(selectedCards));
+        if(numberOfElements(selectedCards) < 3) {
+            JOptionPane.showMessageDialog(null, "Devi selezionare 3 carte!");
+            return false;
+        }
+        return true;
     }
 }
