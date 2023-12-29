@@ -7,8 +7,8 @@ import java.util.LinkedList;
 
 public class Board extends JFrame {
     private JPanel buttonField;
+    private ScoreBoard scoreField;
     public JButton attackButton;
-    private JButton deleteButton;
     private JButton positioningButton;
     private LinkedList<Card> cards;
     private int cardWidth;
@@ -49,9 +49,9 @@ public class Board extends JFrame {
         Font buttonFont = new Font("Monospaced", Font.BOLD, 16);
 
         buttonField = new JPanel();
-        buttonField.setBackground(new Color(42, 45, 52));
-        buttonField.setBounds((int)((width - screenWidth / 100 * 0.8) / 7 * 5.5), (height - buttonFieldHeight + 14) / 2, buttonFieldWidth, buttonFieldHeight - 65);
-        buttonField.setBorder(BorderFactory.createLineBorder(new Color(184,48,175), 3));
+        buttonField.setBackground(new Color(170, 70, 1));
+        buttonField.setBounds((int)((width - screenWidth / 100 * 0.8) / 7 * 5.5), (height - buttonFieldHeight + 12) / 2, buttonFieldWidth, buttonFieldHeight - 65);
+        buttonField.setBorder(BorderFactory.createLoweredBevelBorder());
         buttonField.setLayout(null);
         buttonField.setVisible(true);
         this.add(buttonField);
@@ -79,14 +79,20 @@ public class Board extends JFrame {
         buttonField.add(positioningButton);
         positioningButton.setVisible(true);
 
+        scoreField = new ScoreBoard();
+        this.add(scoreField);
 
-        p1 = new Player(panelWidth, panelHeight, 1, new Color(145, 125, 140), true, this);
+
+        //JLabel
+
+
+        p1 = new Player(panelWidth, panelHeight, 1, new Color(85, 87, 93), true, this);
         p1.setBounds(10, 10, panelWidth, panelHeight);
         p1.setLayout(null);
         p1.setVisible(true);
         this.add(p1);
 
-        p2 = new Player(panelWidth, panelHeight, 2, new Color(145, 125, 140), false, this);
+        p2 = new Player(panelWidth, panelHeight, 2, new Color(85, 87, 93), false, this);
         p2.setBounds(10, panelHeight + 20, panelWidth, panelHeight);
         p2.setLayout(null);
         p2.setVisible(true);

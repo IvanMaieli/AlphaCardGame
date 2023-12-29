@@ -8,11 +8,8 @@ public class Player extends JPanel {
     private JPanel deckPanel;
     private JPanel field;
     private JPanel fieldName;
-
     public LinkedList<Card> deck;
     private LinkedList<Card> selectedCards;
-    private int panelWidth;
-    private int panelHeight;
     private int deckWidth;
     private int fieldWidth;
     private int fieldHeight;
@@ -22,8 +19,6 @@ public class Player extends JPanel {
     private Board board;
 
     public Player(int panelWidth, int panelHeight, int p, Color color, boolean turn, Board board) {
-        this.panelWidth = panelWidth;
-        this.panelHeight = panelHeight;
         this.deckWidth = panelWidth - 20;
         this.turn = turn;
         this.board = board;
@@ -44,7 +39,7 @@ public class Player extends JPanel {
 
         deckPanel = new JPanel();
         deckPanel.setBounds(10, 10 + fieldHeight * (p - 1), deckWidth, fieldHeight);
-        deckPanel.setBorder(BorderFactory.createLineBorder(new Color(184,48,175), 3));
+        deckPanel.setBorder(BorderFactory.createLoweredBevelBorder());
         deckPanel.setBackground(color);
         deckPanel.setLayout(null);
         deckPanel.setVisible(true);
@@ -53,7 +48,7 @@ public class Player extends JPanel {
         field = new JPanel();
         field.setBounds((panelWidth - fieldWidth) / 2, (10 * 2) + (fieldHeight) - (fieldHeight + 20) * (p - 1),
                 fieldWidth, fieldHeight);
-        field.setBorder(BorderFactory.createLineBorder(new Color(184,48,175), 3));
+        field.setBorder(BorderFactory.createLoweredBevelBorder());
         field.setBackground(color);
         field.setLayout(null);
         field.setVisible(true);
@@ -62,7 +57,8 @@ public class Player extends JPanel {
         fieldName = new JPanel();
         fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 6, (10 * 2) + (fieldHeight) - (fieldHeight + 20) * (p - 1),
                 fieldWidth / 6, fieldHeight / 6);
-        fieldName.setBackground(new Color(184,48,175));
+        fieldName.setBackground(new Color(170, 70, 1));
+        fieldName.setBorder(BorderFactory.createLoweredBevelBorder());
         fieldName.setLayout(null);
         fieldName.setVisible(true);
         this.add(fieldName);

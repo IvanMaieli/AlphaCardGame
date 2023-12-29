@@ -56,7 +56,7 @@ public abstract class Card extends JButton {
         public void mouseEntered(MouseEvent mouseEvent) {
             Component[] components = getComponents();
             for(Component c : components) {
-                c.setBackground(new Color(184,48,175));
+                c.setBackground(new Color(170, 70, 1));
             }
         }
 
