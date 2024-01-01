@@ -17,6 +17,9 @@ public class Player extends JPanel {
     private int cardHeight;
     private boolean turn;
     private Board board;
+    private Color colorAttack1 = Color.BLUE;
+    private Color colorAttack2 = Color.GREEN;
+    private Color getColorAttack3 = Color.PINK;
 
     public Player(int panelWidth, int panelHeight, int p, Color color, boolean turn, Board board) {
         this.deckWidth = panelWidth - 20;
@@ -55,7 +58,7 @@ public class Player extends JPanel {
         this.add(field);
 
         fieldName = new JPanel();
-        fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 6, (10 * 2) + (fieldHeight) - (fieldHeight + 20) * (p - 1),
+        fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 6, (int) ((10 * 2) + (fieldHeight) - (fieldHeight + 20) * (p - 1)),
                 fieldWidth / 6, fieldHeight / 6);
         fieldName.setBackground(new Color(170, 70, 1));
         fieldName.setBorder(BorderFactory.createLoweredBevelBorder());
@@ -70,7 +73,6 @@ public class Player extends JPanel {
         pName.setLayout(null);
         pName.setVisible(true);
         fieldName.add(pName);
-
 
         cardHeight = fieldHeight - 20;
         cardWidth = (int) (deckWidth - 80) / 7;
@@ -148,9 +150,13 @@ public class Player extends JPanel {
     }
 
     public void cardClicked(Card card) {
+        // se è il proprio turno
         if (turn) {
+            // se la partita è in fase di posizionamento
             if (this.board.isPhasePositioning()) {
+                // se il mazzo contiene la carta
                 if (deck.contains(card)) {
+                    // se non abbiamo selezionato già 3 carte
                     if (numberOfElements(selectedCards) == 3) {
                         JOptionPane.showMessageDialog(null, "Non puoi selezionare altre carte!");
                     } else {
@@ -199,8 +205,11 @@ public class Player extends JPanel {
                         i++;
                     }
                 }
+            } else {
+
             }
             updateView();
+
         }
     }
 

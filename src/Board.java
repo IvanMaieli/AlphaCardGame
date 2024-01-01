@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class Board extends JFrame {
     private JPanel buttonField;
-    private ScoreBoard scoreField;
+    private JPanel scoreField;
     public JButton attackButton;
     private JButton positioningButton;
     private LinkedList<Card> cards;
@@ -38,7 +38,7 @@ public class Board extends JFrame {
 
         this.setTitle("CyberAttack");
         this.getContentPane().setBackground(stdColorCard);
-        this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width - 12, height - 25);
+        this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height - 25);
         this.setLayout(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -78,13 +78,6 @@ public class Board extends JFrame {
         positioningButton.setRolloverEnabled(false);
         buttonField.add(positioningButton);
         positioningButton.setVisible(true);
-
-        scoreField = new ScoreBoard();
-        this.add(scoreField);
-
-
-        //JLabel
-
 
         p1 = new Player(panelWidth, panelHeight, 1, new Color(85, 87, 93), true, this);
         p1.setBounds(10, 10, panelWidth, panelHeight);
@@ -181,6 +174,8 @@ public class Board extends JFrame {
                     }
                 } else {
                     phasePositioning = !phasePositioning;
+                    positioningButton.setEnabled(false);
+                    attackButton.setEnabled(true);
                 }
             }
         }
