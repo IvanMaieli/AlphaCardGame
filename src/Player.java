@@ -8,7 +8,7 @@ public class Player extends JPanel {
     private JPanel deckPanel;
     private JPanel field;
     private JPanel fieldName;
-    public LinkedList<Card> deck;
+    private LinkedList<Card> deck;
     private LinkedList<Card> selectedCards;
     private int deckWidth;
     private int fieldWidth;
