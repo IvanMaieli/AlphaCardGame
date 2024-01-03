@@ -63,10 +63,10 @@ public class Player extends JPanel {
         fieldName = new JPanel();
         if(id == 2) {
             fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 6, (int) field.getY() + fieldHeight - (fieldHeight / 6) * 2,
-                    fieldWidth / 6, fieldHeight / 6);
+                    fieldWidth / 4, fieldHeight / 6);
         } else {
             fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 6, (int) ((10 * 2) + (fieldHeight) - (fieldHeight + 20) * (id - 1)),
-                    fieldWidth / 6, fieldHeight / 6);
+                    fieldWidth / 4, fieldHeight / 6);
         }
 
         fieldName.setBackground(new Color(170, 70, 1));
