@@ -33,7 +33,7 @@ public class Menu extends JFrame {
         int buttonWidth = 380;
         int buttonHeight = 50;
 
-        Font font = new Font("Monospaced", Font.BOLD, 16);
+        Font font = new Font("Helvetica", Font.BOLD, 16);
 
         play = new JButton("Play");
         play.setBackground(new Color(42, 45, 52));

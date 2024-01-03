@@ -10,6 +10,8 @@ import java.util.LinkedList;
 public class Board extends JFrame {
     private JPanel buttonField;
     private JPanel turnField;
+    private JLabel turnLabel;
+    private JLabel actualPlayerLabel;
     public JButton attackButton;
     private JButton positioningButton;
     private JButton changeTurnButton;
@@ -29,7 +31,7 @@ public class Board extends JFrame {
     private int actualTurn = 1;
     private Player actualTurnPlayer;
     private Player actualWaitPlayer;
-    private Font buttonFont = new Font("Helvetica", Font.BOLD, 12);
+    private Font buttonFont = new Font("Helvetica", Font.BOLD, 14);
 
 
     public Board() {
@@ -105,6 +107,14 @@ public class Board extends JFrame {
         turnField.setVisible(true);
         this.add(turnField);
 
+        turnLabel = new JLabel("Turno: " + actualTurn + " / 22");
+        turnLabel.setFont(buttonFont);
+        turnLabel.setForeground(new Color(235, 212, 203));
+        turnLabel.setBounds(10, (turnField.getHeight() - (turnField.getHeight() / 6)) / 4, turnField.getWidth(),turnField.getHeight() / 6);
+        turnLabel.setLayout(null);
+        turnLabel.setVisible(true);
+        turnField.add(turnLabel);
+
         attackOrder = new int[3];
         attOrderCont = 0;
         defenseOrder = new int[3];
@@ -122,13 +132,29 @@ public class Board extends JFrame {
         p2.setVisible(true);
         this.add(p2);
 
+        this.actualTurnPlayer = p1;
+        this.actualWaitPlayer = p2;
+
+        actualPlayerLabel = new JLabel("Player " + actualTurnPlayer.getId());
+        actualPlayerLabel.setFont(buttonFont);
+        actualPlayerLabel.setForeground(new Color(235, 212, 203));
+        actualPlayerLabel.setBounds(10, (turnField.getHeight() - (turnField.getHeight() / 6)) / 4 * 3, turnField.getWidth(),turnField.getHeight() / 6);
+        actualPlayerLabel.setLayout(null);
+        actualPlayerLabel.setVisible(true);
+        turnField.add(actualPlayerLabel);
+
         mix();
 
         chooseCards(p1, p2);
 
         repaint();
-
         this.setVisible(true);
+    }
+
+
+    public void updateTurnField() {
+        this.turnLabel.setText("Turno: " + actualTurn + " / 22");
+        this.actualPlayerLabel.setText("Player " + this.actualTurnPlayer.getId());
     }
 
 
@@ -137,6 +163,7 @@ public class Board extends JFrame {
         p2.changeTurn();
         this.actualTurnPlayer = p1;
         this.actualWaitPlayer = p2;
+        updateTurnField();
         p2.waitTurn();
         p1.chooseCards(cards);
     }
@@ -241,8 +268,7 @@ public class Board extends JFrame {
             for (Card c : actualTurnPlayer.getSelectedCards()) {
                 if (attackOrder[i] == j) {
                     attacker = c;
-                    damage = c.getAttack();
-                    //System.out.println(attacker.getName() + "\n" + damage);
+                    damage = attacker.getAttack();
                     break;
                 }
                 j++;
@@ -293,6 +319,9 @@ public class Board extends JFrame {
                         chooseCards(actualWaitPlayer, actualTurnPlayer);
                     }
                 }
+
+                if(changeTurnButton.getText().equals("TERMINA"))
+                    System.exit(1);
             }
 
             if (e.getSource() == positioningButton) {
@@ -300,6 +329,7 @@ public class Board extends JFrame {
                     if (actualTurn > 2) {
                         phasePositioning = !phasePositioning;
                         actualTurnPlayer.disableDeck();
+                        actualTurnPlayer.waitTurn();
                         positioningButton.setEnabled(false);
                     } else {
                         actualTurnPlayer.waitTurn();
@@ -313,9 +343,23 @@ public class Board extends JFrame {
             }
 
             if (e.getSource() == attackButton) {
-                attack();
-                attackButton.setEnabled(false);
-                changeTurnButton.setEnabled(true);
+                if (actualTurn == 22) {
+                    attack();
+                    attackButton.setEnabled(false);
+                    changeTurnButton.setText("TERMINA");
+                    changeTurnButton.setEnabled(true);
+                    if (p1.getPoints() > p2.getPoints())
+                        JOptionPane.showMessageDialog(null, "Ha vinto il Player " + p1.getId());
+                    else if (p1.getPoints() < p2.getPoints())
+                        JOptionPane.showMessageDialog(null, "Ha vinto il Player " + p2.getId());
+                    else JOptionPane.showMessageDialog(null, "La partita è finita in pareggio");
+
+
+                } else {
+                    attack();
+                    attackButton.setEnabled(false);
+                    changeTurnButton.setEnabled(true);
+                }
             }
         }
     }

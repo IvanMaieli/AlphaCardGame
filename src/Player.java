@@ -156,6 +156,7 @@ public class Player extends JPanel {
             i++;
         }
         updateScore();
+
         field.repaint();
     }
 
