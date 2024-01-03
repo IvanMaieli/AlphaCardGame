@@ -172,14 +172,14 @@ public class Board extends JFrame {
     private void mix() {
         cards = new LinkedList<>();
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 60; i++) {
             if(i < 2) cards.add(new Nebula(i, cardWidth, cardHeight, legendaryColorCard));
             else if (i < 4) cards.add(new Nightmare(i, cardWidth, cardHeight, legendaryColorCard));
-            else if (i < 8) cards.add(new Gigaorso(i, cardWidth, cardHeight, epicColorCard));
-            else if (i < 12) cards.add(new Gigaworm(i, cardWidth, cardHeight, epicColorCard));
-            else if (i < 15) cards.add(new AntsHorde(i, cardWidth, cardHeight, stdColorCard));
-            else if (i < 22) cards.add(new ElRaton(i, cardWidth, cardHeight, stdColorCard));
-            else if (i < 30) cards.add(new CyberWolf(i, cardWidth, cardHeight, stdColorCard));
+            else if (i < 10) cards.add(new Gigaorso(i, cardWidth, cardHeight, epicColorCard));
+            else if (i < 14) cards.add(new Gigaworm(i, cardWidth, cardHeight, epicColorCard));
+            else if (i < 18) cards.add(new AntsHorde(i, cardWidth, cardHeight, stdColorCard));
+            else if (i < 25) cards.add(new ElRaton(i, cardWidth, cardHeight, stdColorCard));
+            else if (i < 35) cards.add(new CyberWolf(i, cardWidth, cardHeight, stdColorCard));
             else cards.add(new Spaceman(i, cardWidth, cardHeight, stdColorCard));
         }
 
@@ -343,7 +343,7 @@ public class Board extends JFrame {
             }
 
             if (e.getSource() == attackButton) {
-                if (actualTurn == 22) {
+                if (actualTurn == 6) {
                     attack();
                     attackButton.setEnabled(false);
                     changeTurnButton.setText("TERMINA");

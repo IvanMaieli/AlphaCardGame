@@ -33,16 +33,16 @@ public abstract class Card extends JButton {
         this.name = name;
         this.attack = attack;
         this.defense = defense;
-        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(cardWidth - 30, (int)(cardHeight - (cardHeight * 0.2) - (cardHeight * 0.15)), Image.SCALE_SMOOTH);
+        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(cardWidth - 30, (int)(cardHeight - (cardHeight * 0.25) - (cardHeight * 0.05)), Image.SCALE_SMOOTH);
         this.backImg = new ImageIcon("raw_images/cards/back_card.jpg").getImage().getScaledInstance(cardWidth, cardHeight, Image.SCALE_SMOOTH);
         this.color = color;
         this.cardWidth = cardWidth;
         this.cardHeight = cardHeight;
 
         colors = new Color[3];
-        colors[0] = Color.BLUE;
-        colors[1] = Color.GREEN;
-        colors[2] = Color.PINK;
+        colors[0] = new Color(111, 29, 27);
+        colors[1] = new Color(36, 130, 50);
+        colors[2] = new Color(0, 117, 162);
 
         this.setSize(cardWidth, cardHeight);
         this.setBorder(BorderFactory.createRaisedBevelBorder());
