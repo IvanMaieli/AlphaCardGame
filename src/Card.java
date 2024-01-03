@@ -24,7 +24,7 @@ public abstract class Card extends JButton {
     private JLabel nameLabel;
     private int cardWidth;
     private int cardHeight;
-    private Font fontCard = new Font("Monospaced", Font.BOLD, 16);
+    private Font fontCard = new Font("Helvetica", Font.BOLD, 12);
 
     private boolean attackMode = false;
 
@@ -50,7 +50,6 @@ public abstract class Card extends JButton {
         this.setLayout(null);
         this.setBorderPainted(false);
         this.setBackground(color);
-        //this.addMouseListener(new CardMouseListener());
         this.addActionListener(new CardActionListener());
         this.setVisible(true);
 
@@ -73,14 +72,14 @@ public abstract class Card extends JButton {
 
         img = new JLabel();
         img.setIcon(new ImageIcon(frontImg));
-        img.setBounds((cardWidth - img.getIcon().getIconWidth()) / 2 - 2, (int) (cardHeight * 0.2), cardWidth,(int) (cardHeight - (cardHeight * 0.20) - (cardHeight* 0.15)));
+        img.setBounds((cardWidth - img.getIcon().getIconWidth()) / 2 - 2, (int) (cardHeight * 0.20), cardWidth,(int) (cardHeight - (cardHeight * 0.20) - (cardHeight* 0.15)));
         img.setVisible(true);
         this.add(img);
 
         int labelWidth = (int) (panelSpecs.getWidth() * 0.42);
         int labelHeight = 30;
 
-        attackLabel = new JLabel("ATT:" + attack);
+        attackLabel = new JLabel("ATT: " + attack);
         attackLabel.setForeground(new Color(235, 212, 203));
         attackLabel.setFont(fontCard);
         attackLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -88,7 +87,7 @@ public abstract class Card extends JButton {
         attackLabel.setVisible(true);
         panelSpecs.add(attackLabel);
 
-        defLabel = new JLabel("DEF:" + defense);
+        defLabel = new JLabel("DEF: " + defense);
         defLabel.setForeground(new Color(235, 212, 203));
         defLabel.setFont(fontCard);
         defLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,7 +100,7 @@ public abstract class Card extends JButton {
         nameLabel.setForeground(new Color(235, 212, 203));
         nameLabel.setFont(fontCard);
         nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
-        nameLabel.setBounds((panelName.getWidth() - nameLabelWidth) / 2, (panelName.getHeight() - labelHeight) / 2 , nameLabelWidth, labelHeight);
+        nameLabel.setBounds((panelName.getWidth() - nameLabelWidth) / 2, (panelName.getHeight() - labelHeight) / 2 - 1, nameLabelWidth, labelHeight);
         nameLabel.setVisible(true);
         panelName.add(nameLabel);
     }
@@ -130,16 +129,6 @@ public abstract class Card extends JButton {
         for (Component c : components)
             c.setBackground(new Color(42, 45, 52));
         this.repaint();
-//        int labelWidth = (int) (panelSpecs.getWidth() * 0.42);
-//        int labelHeight = 30;
-//
-//        defLabel = new JLabel("DEF:" + defense);
-//        defLabel.setForeground(new Color(235, 212, 203));
-//        defLabel.setFont(fontCard);
-//        defLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//        defLabel.setBounds(panelSpecs.getWidth() - (labelWidth + (int)(cardWidth * 0.06)) - 2, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
-//        defLabel.setVisible(true);
-//        panelSpecs.add(defLabel);
     }
 
     public int getId() {
@@ -328,33 +317,4 @@ public abstract class Card extends JButton {
         this.attackMode = attackMode;
     }
 
-    protected class CardMouseListener implements MouseListener {
-        @Override
-        public void mouseClicked(MouseEvent mouseEvent) {}
-
-        @Override
-        public void mousePressed(MouseEvent mouseEvent) {}
-
-        @Override
-        public void mouseReleased(MouseEvent mouseEvent) {}
-
-        @Override
-        public void mouseEntered(MouseEvent mouseEvent) {
-            if(!attackMode) {
-                Component[] components = getComponents();
-                for (Component c : components)
-                    c.setBackground(new Color(170, 70, 1));
-            }
-        }
-
-        @Override
-        public void mouseExited(MouseEvent mouseEvent) {
-            if (!attackMode) {
-                Component[] components = getComponents();
-                for (Component c : components)
-                    c.setBackground(new Color(42, 45, 52));
-            }
-        }
-
-    }
 }

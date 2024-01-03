@@ -29,6 +29,8 @@ public class Board extends JFrame {
     private int actualTurn = 1;
     private Player actualTurnPlayer;
     private Player actualWaitPlayer;
+    private Font buttonFont = new Font("Helvetica", Font.BOLD, 12);
+
 
     public Board() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -54,8 +56,6 @@ public class Board extends JFrame {
 
         int buttonFieldHeight = 200;
         int buttonFieldWidth = 200;
-
-        Font buttonFont = new Font("Monospaced", Font.BOLD, 16);
 
         buttonField = new JPanel();
         buttonField.setBackground(new Color(170, 70, 1));

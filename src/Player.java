@@ -20,6 +20,8 @@ public class Player extends JPanel {
     private int cardHeight;
     private boolean turn;
     private Board board;
+    private Font font = new Font("Helvetica", Font.BOLD, 14);
+
 
     public Player(int panelWidth, int panelHeight, int id, Color color, boolean turn, Board board) {
         this.points = 0;
@@ -41,8 +43,6 @@ public class Player extends JPanel {
         fieldWidth = panelWidth / 7 * 3;
         fieldHeight = (panelHeight - 20) / 2;
 
-        Font font = new Font("Monospaced", Font.BOLD, 16);
-
         deckPanel = new JPanel();
         deckPanel.setBounds(10, 10 + fieldHeight * (id - 1), deckWidth, fieldHeight);
         deckPanel.setBorder(BorderFactory.createLoweredBevelBorder());
@@ -62,11 +62,11 @@ public class Player extends JPanel {
 
         fieldName = new JPanel();
         if(id == 2) {
-            fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 6, (int) field.getY() + fieldHeight - (fieldHeight / 6) * 2,
-                    fieldWidth / 4, fieldHeight / 6);
+            fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 5, (int) field.getY() + fieldHeight - (fieldHeight / 6) * 2,
+                    fieldWidth / 5, fieldHeight / 6);
         } else {
-            fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 6, (int) ((10 * 2) + (fieldHeight) - (fieldHeight + 20) * (id - 1)),
-                    fieldWidth / 4, fieldHeight / 6);
+            fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 5, (int) ((10 * 2) + (fieldHeight) - (fieldHeight + 20) * (id - 1)),
+                    fieldWidth / 5, fieldHeight / 6);
         }
 
         fieldName.setBackground(new Color(170, 70, 1));
@@ -84,8 +84,8 @@ public class Player extends JPanel {
         fieldName.add(pName);
 
         fieldScore = new JPanel();
-        fieldScore.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 6, fieldName.getY() + fieldName.getHeight(),
-                fieldWidth / 6, fieldHeight / 6);
+        fieldScore.setBounds(fieldName.getX(), fieldName.getY() + fieldName.getHeight(),
+                fieldName.getWidth(), fieldName.getHeight());
         fieldScore.setBackground(new Color(170, 70, 1));
         fieldScore.setBorder(BorderFactory.createLoweredBevelBorder());
         fieldScore.setLayout(null);
