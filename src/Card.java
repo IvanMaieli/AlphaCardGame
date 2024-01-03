@@ -1,19 +1,146 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public abstract class Card extends JButton {
     private int id;
     protected Player player = null;
+    private Color[] colors;
+    private String name;
+    private int attack;
+    private int defense;
+    private Image frontImg;
+    private Image backImg;
+    private JLabel img;
+    private final Color stdColorCard = new Color(42, 45, 52);
+    private Color color;
+    private JPanel panelSpecs;
+    private JPanel panelName;
+    private JLabel attackLabel;
+    private JLabel defLabel;
+    private JLabel nameLabel;
+    private int cardWidth;
+    private int cardHeight;
+    private Font fontCard = new Font("Monospaced", Font.BOLD, 16);
 
-    public Card(int id) {
+    private boolean attackMode = false;
+
+    public Card(int id, String name, int attack, int defense,
+                String imgPath, Color color, int cardWidth, int cardHeight) {
         this.id = id;
+        this.name = name;
+        this.attack = attack;
+        this.defense = defense;
+        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(cardWidth - 30, (int)(cardHeight - (cardHeight * 0.2) - (cardHeight * 0.15)), Image.SCALE_SMOOTH);
+        this.backImg = new ImageIcon("raw_images/cards/back_card.jpg").getImage().getScaledInstance(cardWidth, cardHeight, Image.SCALE_SMOOTH);
+        this.color = color;
+        this.cardWidth = cardWidth;
+        this.cardHeight = cardHeight;
+
+        colors = new Color[3];
+        colors[0] = Color.BLUE;
+        colors[1] = Color.GREEN;
+        colors[2] = Color.PINK;
+
+        this.setSize(cardWidth, cardHeight);
+        this.setBorder(BorderFactory.createRaisedBevelBorder());
+        this.setLayout(null);
+        this.setBorderPainted(false);
+        this.setBackground(color);
+        //this.addMouseListener(new CardMouseListener());
+        this.addActionListener(new CardActionListener());
+        this.setVisible(true);
+
+        panelSpecs = new JPanel();
+        panelSpecs.setBounds(0,0,cardWidth, (int)(cardHeight * 0.2));
+        panelSpecs.setBackground(stdColorCard);
+        panelSpecs.setBorder(BorderFactory.createRaisedBevelBorder());
+        panelSpecs.setLayout(null);
+        panelSpecs.setVisible(true);
+        this.add(panelSpecs);
+
+        panelName = new JPanel();
+        panelName.setBounds(0, (int)(cardHeight - 1.35 * (cardHeight * 0.15)), cardWidth, (int)(cardHeight * 0.15) + 1);
+        panelName.setBackground(stdColorCard);
+        panelName.setBorder(BorderFactory.createRaisedBevelBorder());
+        panelName.setFont(fontCard);
+        panelName.setLayout(null);
+        panelName.setVisible(true);
+        this.add(panelName);
+
+        img = new JLabel();
+        img.setIcon(new ImageIcon(frontImg));
+        img.setBounds((cardWidth - img.getIcon().getIconWidth()) / 2 - 2, (int) (cardHeight * 0.2), cardWidth,(int) (cardHeight - (cardHeight * 0.20) - (cardHeight* 0.15)));
+        img.setVisible(true);
+        this.add(img);
+
+        int labelWidth = (int) (panelSpecs.getWidth() * 0.42);
+        int labelHeight = 30;
+
+        attackLabel = new JLabel("ATT:" + attack);
+        attackLabel.setForeground(new Color(235, 212, 203));
+        attackLabel.setFont(fontCard);
+        attackLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        attackLabel.setBounds((int)(cardWidth * 0.06), (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        attackLabel.setVisible(true);
+        panelSpecs.add(attackLabel);
+
+        defLabel = new JLabel("DEF:" + defense);
+        defLabel.setForeground(new Color(235, 212, 203));
+        defLabel.setFont(fontCard);
+        defLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        defLabel.setBounds(panelSpecs.getWidth() - (labelWidth + (int)(cardWidth * 0.06)) - 2, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        defLabel.setVisible(true);
+        panelSpecs.add(defLabel);
+
+        int nameLabelWidth = 150;
+        nameLabel = new JLabel(name);
+        nameLabel.setForeground(new Color(235, 212, 203));
+        nameLabel.setFont(fontCard);
+        nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+        nameLabel.setBounds((panelName.getWidth() - nameLabelWidth) / 2, (panelName.getHeight() - labelHeight) / 2 , nameLabelWidth, labelHeight);
+        nameLabel.setVisible(true);
+        panelName.add(nameLabel);
     }
 
-    public void coverCard() {}
+    public void coverCard() {
+        panelSpecs.setVisible(false);
+        panelName.setVisible(false);
+        img.setIcon(new ImageIcon(backImg));
+        img.setBounds(0,0, cardWidth, cardHeight);
+        img.setVisible(true);
+        this.setEnabled(false);
+    }
 
-    public void showCard() {}
+    public void showCard() {
+        panelSpecs.setVisible(true);
+        panelName.setVisible(true);
+        img.setIcon(new ImageIcon(frontImg));
+        img.setBounds((cardWidth - img.getIcon().getIconWidth()) / 2 - 2, (int) (cardHeight * 0.2), cardWidth, (int) (cardHeight - (cardHeight * 0.20) - (cardHeight* 0.15)));
+        img.setVisible(true);
+        this.setEnabled(true);
+    }
+
+    public void updateLabels() {
+        this.defLabel.setText("DEF: " + defense);
+        Component[] components = getComponents();
+        for (Component c : components)
+            c.setBackground(new Color(42, 45, 52));
+        this.repaint();
+//        int labelWidth = (int) (panelSpecs.getWidth() * 0.42);
+//        int labelHeight = 30;
+//
+//        defLabel = new JLabel("DEF:" + defense);
+//        defLabel.setForeground(new Color(235, 212, 203));
+//        defLabel.setFont(fontCard);
+//        defLabel.setHorizontalAlignment(SwingConstants.CENTER);
+//        defLabel.setBounds(panelSpecs.getWidth() - (labelWidth + (int)(cardWidth * 0.06)) - 2, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+//        defLabel.setVisible(true);
+//        panelSpecs.add(defLabel);
+    }
 
     public int getId() {
         return id;
@@ -31,20 +158,179 @@ public abstract class Card extends JButton {
         this.player.cardClicked(this);
     }
 
+    public void changeBkg(int c){
+        attackMode = !attackMode;
+        Component[] components = getComponents();
+        for (Component comp : components) {
+            comp.setBackground(colors[c]);
+        }
+        this.repaint();
+    }
+
     @Override
     public boolean equals(Object o) {
         Card temp;
-        if(!(o instanceof Card)) return false;
+        if (!(o instanceof Card)) return false;
         temp = (Card) o;
         return this.getId() == temp.getId();
     }
 
-
-    protected class CardListener implements MouseListener {
+    protected class CardActionListener implements ActionListener{
         @Override
-        public void mouseClicked(MouseEvent mouseEvent) {
+        public void actionPerformed(ActionEvent e) {
             cardClicked();
         }
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Color[] getColors() {
+        return colors;
+    }
+
+    public void setColors(Color[] colors) {
+        this.colors = colors;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public Image getFrontImg() {
+        return frontImg;
+    }
+
+    public void setFrontImg(Image frontImg) {
+        this.frontImg = frontImg;
+    }
+
+    public Image getBackImg() {
+        return backImg;
+    }
+
+    public void setBackImg(Image backImg) {
+        this.backImg = backImg;
+    }
+
+    public JLabel getImg() {
+        return img;
+    }
+
+    public void setImg(JLabel img) {
+        this.img = img;
+    }
+
+    public Color getStdColorCard() {
+        return stdColorCard;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public JPanel getPanelSpecs() {
+        return panelSpecs;
+    }
+
+    public void setPanelSpecs(JPanel panelSpecs) {
+        this.panelSpecs = panelSpecs;
+    }
+
+    public JPanel getPanelName() {
+        return panelName;
+    }
+
+    public void setPanelName(JPanel panelName) {
+        this.panelName = panelName;
+    }
+
+    public JLabel getAttackLabel() {
+        return attackLabel;
+    }
+
+    public void setAttackLabel(JLabel attackLabel) {
+        this.attackLabel = attackLabel;
+    }
+
+    public JLabel getDefLabel() {
+        return defLabel;
+    }
+
+    public void setDefLabel(JLabel defLabel) {
+        this.defLabel = defLabel;
+    }
+
+    public JLabel getNameLabel() {
+        return nameLabel;
+    }
+
+    public void setNameLabel(JLabel nameLabel) {
+        this.nameLabel = nameLabel;
+    }
+
+    public int getCardWidth() {
+        return cardWidth;
+    }
+
+    public void setCardWidth(int cardWidth) {
+        this.cardWidth = cardWidth;
+    }
+
+    public int getCardHeight() {
+        return cardHeight;
+    }
+
+    public void setCardHeight(int cardHeight) {
+        this.cardHeight = cardHeight;
+    }
+
+    public Font getFontCard() {
+        return fontCard;
+    }
+
+    public void setFontCard(Font fontCard) {
+        this.fontCard = fontCard;
+    }
+
+    public boolean isAttackMode() {
+        return attackMode;
+    }
+
+    public void setAttackMode(boolean attackMode) {
+        this.attackMode = attackMode;
+    }
+
+    protected class CardMouseListener implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent mouseEvent) {}
 
         @Override
         public void mousePressed(MouseEvent mouseEvent) {}
@@ -54,17 +340,20 @@ public abstract class Card extends JButton {
 
         @Override
         public void mouseEntered(MouseEvent mouseEvent) {
-            Component[] components = getComponents();
-            for(Component c : components) {
-                c.setBackground(new Color(170, 70, 1));
+            if(!attackMode) {
+                Component[] components = getComponents();
+                for (Component c : components)
+                    c.setBackground(new Color(170, 70, 1));
             }
         }
 
         @Override
         public void mouseExited(MouseEvent mouseEvent) {
-            Component[] components = getComponents();
-            for(Component c : components)
-                c.setBackground(new Color(42, 45, 52));
+            if (!attackMode) {
+                Component[] components = getComponents();
+                for (Component c : components)
+                    c.setBackground(new Color(42, 45, 52));
+            }
         }
 
     }

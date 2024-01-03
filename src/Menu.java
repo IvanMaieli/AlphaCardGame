@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -41,7 +43,7 @@ public class Menu extends JFrame {
         play.setLayout(null);
         play.setFocusPainted(false);
         play.setRolloverEnabled(false);
-        play.addMouseListener(new MenuListener());
+        play.addActionListener(new MenuListener());
         play.setVisible(true);
         add(play);
 
@@ -53,37 +55,24 @@ public class Menu extends JFrame {
         play.setLayout(null);
         rules.setFocusPainted(false);
         rules.setRolloverEnabled(false);
-        rules.addMouseListener(new MenuListener());
+        rules.addActionListener(new MenuListener());
         rules.setVisible(true);
         add(rules);
 
     }
 
-    private class MenuListener implements MouseListener {
+    private class MenuListener implements ActionListener {
         @Override
-        public void mouseClicked(MouseEvent mouseEvent) {
-            if(mouseEvent.getSource() == play) {
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == play) {
                 board = new Board();
                 dispose();
             }
 
-            if(mouseEvent.getSource() == rules) {
+            if (e.getSource() == rules) {
                 rule = new Rule();
             }
         }
-
-        @Override
-        public void mousePressed(MouseEvent mouseEvent) {}
-
-        @Override
-        public void mouseReleased(MouseEvent mouseEvent) {}
-
-        @Override
-        public void mouseEntered(MouseEvent mouseEvent) {}
-
-        @Override
-        public void mouseExited(MouseEvent mouseEvent) {}
-
     }
 
 }
