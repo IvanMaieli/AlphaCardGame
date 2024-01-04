@@ -101,7 +101,7 @@ public class Board extends JFrame {
 
         this.turnField = new JPanel();
         this.turnField.setBackground(new Color(170, 70, 1));
-        this.turnField.setBounds(this.buttonField.getX(),this.buttonField.getY() - (height / 18) - 10, this.buttonField.getWidth(), height / 18);
+        this.turnField.setBounds(this.buttonField.getX(),this.buttonField.getY() - (height / 16) - 10, this.buttonField.getWidth(), height / 16);
         this.turnField.setBorder(BorderFactory.createLoweredBevelBorder());
         this.turnField.setLayout(null);
         this.turnField.setVisible(true);
@@ -205,7 +205,6 @@ public class Board extends JFrame {
 
         repaint();
     }
-
 
     public void printDeck() {
         int i = 0;
