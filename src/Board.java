@@ -209,7 +209,7 @@ public class Board extends JFrame {
     public void printDeck() {
         int i = 0;
         for (Card c : this.cards) {
-            c.setBounds(7, (this.panelCards.getHeight() - this.cardHeight + 180) / 2 - i, c.getCardWidth(), c.getCardHeight());
+            c.setBounds((int) ((this.panelCards.getWidth() - this.cardWidth) / 1.75), (this.panelCards.getHeight() - this.cardHeight + 180) / 2 - i, c.getCardWidth(), c.getCardHeight());
             c.setLayout(null);
             c.setVisible(true);
             c.coverCard();
