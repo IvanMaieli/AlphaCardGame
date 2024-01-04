@@ -79,18 +79,14 @@ public abstract class Card extends JButton {
         this.img.setBounds((this.cardWidth - this.img.getIcon().getIconWidth()) / 2,
                 this.panelName.getHeight() + this.panelSpecs.getHeight() + 2, this.cardWidth,
                 this.cardHeight - this.panelName.getHeight() - this.panelSpecs.getHeight() - (cardHeight / 8));
-
         this.img.setVisible(true);
         this.add(this.img);
-
-        int labelWidth = (int) (this.panelSpecs.getWidth() * 0.42);
-        int labelHeight = 30;
 
         this.specsLabel = new JLabel(attack + "/" + defense);
         this.specsLabel.setForeground(new Color(235, 212, 203));
         this.specsLabel.setFont(this.fontCard);
         this.specsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        this.specsLabel.setBounds((cardWidth - labelWidth) / 2, (this.panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        this.specsLabel.setBounds(0, 0, this.cardWidth, this.panelSpecs.getHeight());
         this.specsLabel.setVisible(true);
         this.panelSpecs.add(this.specsLabel);
 
@@ -99,7 +95,7 @@ public abstract class Card extends JButton {
         this.nameLabel.setForeground(new Color(235, 212, 203));
         this.nameLabel.setFont(this.fontCard);
         this.nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
-        this.nameLabel.setBounds((this.panelName.getWidth() - nameLabelWidth) / 2, (this.panelName.getHeight() - labelHeight) / 2, nameLabelWidth, labelHeight);
+        this.nameLabel.setBounds(0, 0, cardWidth, this.panelName.getHeight());
         this.nameLabel.setVisible(true);
         this.panelName.add(this.nameLabel);
     }
