@@ -62,7 +62,7 @@ public abstract class Card extends JButton {
 
         this.panelSpecs = new JPanel();
         this.panelSpecs.setBounds(0, this.panelName.getHeight() + 2,
-                this.cardWidth, this.cardHeight / 6);
+                this.cardWidth, (int) (this.cardHeight / 7.5));
         this.panelSpecs.setBackground(this.stdColorCard);
         this.panelSpecs.setBorder(BorderFactory.createRaisedSoftBevelBorder());
         this.panelSpecs.setLayout(null);
