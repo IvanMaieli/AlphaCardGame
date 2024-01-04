@@ -8,9 +8,5 @@ public abstract class CharacterCard extends Card {
                          String imgPath, Color color, int cardWidth, int cardHeight) {
         super(id, name, attack, defense, imgPath, color, cardWidth, cardHeight);
     }
-
-    public boolean equals(CharacterCard characterCard){
-        if (characterCard == null) return false;
-        return this.getId() == characterCard.getId();
-    }
+    
 }

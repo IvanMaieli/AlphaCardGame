@@ -38,7 +38,7 @@ public class Menu extends JFrame {
         this.play.setBackground(new Color(85, 87, 93));
         this.play.setForeground(new Color(235, 212, 203));
         this.play.setBounds((width - buttonWidth) / 2 - 5, buttonHeight, buttonWidth, buttonHeight);
-        this.setLayout(null);
+        this.play.setLayout(null);
         this.play.setFocusPainted(false);
         this.play.addActionListener(new MenuListener());
         this.add(this.play);
@@ -48,11 +48,10 @@ public class Menu extends JFrame {
         this.rules.setBackground(new Color(85, 87, 93));
         this.rules.setForeground(new Color(235, 212, 203));
         this.rules.setBounds((width - buttonWidth) / 2 - 5, 3 * buttonHeight, buttonWidth, buttonHeight);
-        this.setLayout(null);
+        this.rules.setLayout(null);
         this.rules.setFocusPainted(false);
         this.rules.addActionListener(new MenuListener());
         this.add(this.rules);
-
 
     }
 

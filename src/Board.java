@@ -118,6 +118,11 @@ public class Board extends JFrame {
         this.defenseOrder = new int[3];
         this.defOrderCont = 0;
 
+        for (int i = 0; i < 3; i++) {
+            attackOrder[i] = -1;
+            defenseOrder[i] = -1;
+        }
+
         this.p1 = new Player(panelWidth, panelHeight, 1, new Color(85, 87, 93), false, this);
         this.p1.setBounds(10, 10, panelWidth, panelHeight);
         this.p1.setLayout(null);
@@ -179,17 +184,19 @@ public class Board extends JFrame {
             if (i < 1) this.cards.add(new Gigatron(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
             if(i < 3) this.cards.add(new Nebula(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
             else if (i < 5) this.cards.add(new Nightmare(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
-            else if (i < 8) this.cards.add(new RoboBruin(i, this.cardWidth, this.cardHeight, this.epicColorCard));
-            else if (i < 11) this.cards.add(new Roborat(i, this.cardWidth, this.cardHeight, this.epicColorCard));
-            else if (i < 14) this.cards.add(new QuantumGrade(i, this.cardWidth, this.cardHeight, this.epicColorCard));
-            else if (i < 18) this.cards.add(new Horde(i, this.cardWidth, this.cardHeight, this.stdColorCard));
-            else if (i < 24) this.cards.add(new ElRaton(i, this.cardWidth, this.cardHeight, this.stdColorCard));
-            else if (i < 32) this.cards.add(new ByteHowler(i, this.cardWidth, this.cardHeight, this.stdColorCard));
-            else if (i < 38) this.cards.add(new TecnoPlatypus(i, this.cardWidth, this.cardHeight, this.epicColorCard));
+            else if (i < 7) this.cards.add(new RoboBruin(i, this.cardWidth, this.cardHeight, this.epicColorCard));
+            else if (i < 9) this.cards.add(new Roborat(i, this.cardWidth, this.cardHeight, this.epicColorCard));
+            else if (i < 11) this.cards.add(new QuantumGrade(i, this.cardWidth, this.cardHeight, this.epicColorCard));
+            else if (i < 20) this.cards.add(new Horde(i, this.cardWidth, this.cardHeight, this.stdColorCard));
+            else if (i < 30) this.cards.add(new ByteHowler(i, this.cardWidth, this.cardHeight, this.stdColorCard));
+            else if (i < 38) this.cards.add(new TecnoPlatypus(i, this.cardWidth, this.cardHeight, this.stdColorCard));
             else this.cards.add(new Spaceman(i, this.cardWidth, this.cardHeight, this.stdColorCard));
         }
 
         Collections.shuffle(this.cards);
+        Collections.shuffle(this.cards);
+        Collections.shuffle(this.cards);
+
 
         LinkedList<Card> deckP1 = new LinkedList<>();
         LinkedList<Card> deckP2 = new LinkedList<>();
@@ -241,19 +248,27 @@ public class Board extends JFrame {
 
 
     public void placeAttack(Card card, Player player) {
+        boolean ok = true;
         if(this.attOrderCont < 3) {
             int i = 0;
+            ok = true;
             for (Card c : player.getSelectedCards()) {
                 c.setEnabled(false);
                 if (c.equals(card)) {
-                    c.setEnabled(false);
-                    c.changeBkg(this.attOrderCont);
-                    this.attackOrder[this.attOrderCont] = i;
-                    this.attOrderCont++;
+                    for (int j = 0; j < this.attOrderCont; j++) {
+                        if (this.attackOrder[j] == i)
+                            ok = false;
+                    }
+                    if (ok) {
+                        c.changeBkg(this.attOrderCont);
+                        this.attackOrder[this.attOrderCont] = i;
+                        this.attOrderCont++;
+                    }
                 }
                 i++;
             }
-            this.actualWaitPlayer.enableField(this.defenseOrder, this.defOrderCont);
+            if (ok)
+                this.actualWaitPlayer.enableField(this.defenseOrder, this.defOrderCont);
         }
     }
 
@@ -270,7 +285,7 @@ public class Board extends JFrame {
                 }
                 i++;
             }
-            this.actualTurnPlayer.enableField();
+            this.actualTurnPlayer.enableField(this.attackOrder, this.attOrderCont);
         }
         if (this.defOrderCont == 3) {
             this.actualTurnPlayer.disableField();
@@ -358,7 +373,6 @@ public class Board extends JFrame {
                         changeTurnButton.setEnabled(true);
                         positioningButton.setEnabled(false);
                     }
-
                 }
             }
 
@@ -373,7 +387,6 @@ public class Board extends JFrame {
                     else if (p1.getPoints() < p2.getPoints())
                         JOptionPane.showMessageDialog(null, "Ha vinto il Player " + p2.getId());
                     else JOptionPane.showMessageDialog(null, "La partita è finita in pareggio");
-
 
                 } else {
                     attack();

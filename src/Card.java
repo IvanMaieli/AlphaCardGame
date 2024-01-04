@@ -144,9 +144,9 @@ public abstract class Card extends JButton {
 
     @Override
     public boolean equals(Object o) {
-        Card temp;
+        if ( o == null) return false;
         if (!(o instanceof Card)) return false;
-        temp = (Card) o;
+        Card temp = (Card) o;
         return this.getId() == temp.getId();
     }
 
