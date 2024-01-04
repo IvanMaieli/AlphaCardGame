@@ -108,9 +108,11 @@ public class Board extends JFrame {
         this.add(this.turnField);
 
         this.panelCards = new JPanel();
-        this.panelCards.setBackground(new Color(235, 212, 203));
-        this.panelCards.setBounds(20, this.turnField.getY() , cardWidth + 15, this.turnField.getHeight() + this.buttonField.getHeight() + 10);
+        this.panelCards.setBorder(BorderFactory.createRaisedBevelBorder());
+        this.panelCards.setBackground(new Color(85, 87, 93));
+        this.panelCards.setBounds(20, this.getHeight() / 4 + 6 , cardWidth + 15, (this.getHeight() / 4) * 2 - 40);
         this.panelCards.setVisible(true);
+        this.panelCards.setLayout(null);
         this.add(this.panelCards);
 
         this.attackOrder = new int[3];
@@ -133,7 +135,7 @@ public class Board extends JFrame {
         this.actualTurnPlayer = p1;
         this.actualWaitPlayer = p2;
 
-        this.turnLabel = new JLabel("Turno: " + this.actualTurn + " / 7 - "
+        this.turnLabel = new JLabel("Turno: " + this.actualTurn + " / 16 - "
                 + "Player " + this.actualTurnPlayer.getId());
         this.turnLabel.setFont(this.buttonFont);
         this.turnLabel.setForeground(new Color(235, 212, 203));
@@ -146,6 +148,7 @@ public class Board extends JFrame {
 
 
         this.mix();
+        printDeck();
 
         chooseCards(p1, p2);
 
@@ -155,7 +158,7 @@ public class Board extends JFrame {
 
 
     public void updateTurnField() {
-        this.turnLabel.setText("Turno: " + this.actualTurn + " / 7 - "
+        this.turnLabel.setText("Turno: " + this.actualTurn + " / 16 - "
         + "Player " + this.actualTurnPlayer.getId());
     }
 
@@ -174,7 +177,7 @@ public class Board extends JFrame {
     private void mix() {
         this.cards = new LinkedList<>();
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 45; i++) {
             if(i < 2) this.cards.add(new Nebula(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
             else if (i < 4) this.cards.add(new Nightmare(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
             else if (i < 10) this.cards.add(new Gigaorso(i, this.cardWidth, this.cardHeight, this.epicColorCard));
@@ -206,11 +209,13 @@ public class Board extends JFrame {
     public void printDeck() {
         int i = 0;
         for (Card c : this.cards) {
-            c.setBounds(10, 10 + i, c.getCardWidth(), c.getCardHeight());
+            c.setBounds(7, 12 + i, c.getCardWidth(), c.getCardHeight());
             c.setLayout(null);
             c.setVisible(true);
+            c.coverCard();
             this.panelCards.add(c);
-            i += 1;
+
+            i += 6;
         }
     }
 
