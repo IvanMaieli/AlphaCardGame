@@ -19,8 +19,8 @@ public class Menu extends JFrame {
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
 
-        int width = 400;
-        int height = 160;
+        int width = screenWidth / 4;
+        int height = screenHeight / 5;
 
         this.getContentPane().setBackground(new Color(42, 45, 52));
         this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height);
@@ -29,35 +29,30 @@ public class Menu extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
 
-
-        int buttonWidth = 380;
-        int buttonHeight = 50;
+        int buttonWidth = width / 2;
+        int buttonHeight = height / 6;
 
         Font font = new Font("Helvetica", Font.BOLD, 16);
+        this.play = new JButton("PLAY");
+        this.play.setFont(font);
+        this.play.setBackground(new Color(85, 87, 93));
+        this.play.setForeground(new Color(235, 212, 203));
+        this.play.setBounds((width - buttonWidth) / 2 - 5, buttonHeight, buttonWidth, buttonHeight);
+        this.setLayout(null);
+        this.play.setFocusPainted(false);
+        this.play.addActionListener(new MenuListener());
+        this.add(this.play);
 
-        play = new JButton("Play");
-        play.setBackground(new Color(42, 45, 52));
-        play.setForeground(new Color(235, 212, 203));
-        play.setFont(font);
-        play.setBounds(10, 10, buttonWidth, buttonHeight);
-        play.setLayout(null);
-        play.setFocusPainted(false);
-        play.setRolloverEnabled(false);
-        play.addActionListener(new MenuListener());
-        play.setVisible(true);
-        add(play);
+        this.rules = new JButton("RULES");
+        this.rules.setFont(font);
+        this.rules.setBackground(new Color(85, 87, 93));
+        this.rules.setForeground(new Color(235, 212, 203));
+        this.rules.setBounds((width - buttonWidth) / 2 - 5, 3 * buttonHeight, buttonWidth, buttonHeight);
+        this.setLayout(null);
+        this.rules.setFocusPainted(false);
+        this.rules.addActionListener(new MenuListener());
+        this.add(this.rules);
 
-        rules = new JButton("Rules");
-        rules.setBackground(new Color(42, 45, 52));
-        rules.setForeground(new Color(235, 212, 203));
-        rules.setFont(font);
-        rules.setBounds(10, 20 + buttonHeight, buttonWidth, buttonHeight);
-        play.setLayout(null);
-        rules.setFocusPainted(false);
-        rules.setRolloverEnabled(false);
-        rules.addActionListener(new MenuListener());
-        rules.setVisible(true);
-        add(rules);
 
     }
 

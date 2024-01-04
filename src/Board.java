@@ -101,14 +101,14 @@ public class Board extends JFrame {
 
         this.turnField = new JPanel();
         this.turnField.setBackground(new Color(170, 70, 1));
-        this.turnField.setBounds(this.buttonField.getX(),this.buttonField.getY() - (height / 16) - 10, this.buttonField.getWidth(), height / 16);
+        this.turnField.setBounds(this.buttonField.getX(),this.buttonField.getY() - (height / 18) - 10, this.buttonField.getWidth(), height / 18);
         this.turnField.setBorder(BorderFactory.createLoweredBevelBorder());
         this.turnField.setLayout(null);
         this.turnField.setVisible(true);
         this.add(this.turnField);
 
         this.panelCards = new JPanel();
-        this.panelCards.setBorder(BorderFactory.createRaisedBevelBorder());
+        this.panelCards.setBorder(BorderFactory.createLoweredBevelBorder());
         this.panelCards.setBackground(new Color(85, 87, 93));
         this.panelCards.setBounds(20, this.getHeight() / 4 + 6 , cardWidth + 15, (this.getHeight() / 4) * 2 - 40);
         this.panelCards.setVisible(true);
@@ -206,15 +206,15 @@ public class Board extends JFrame {
         repaint();
     }
 
+
     public void printDeck() {
         int i = 0;
         for (Card c : this.cards) {
-            c.setBounds(7, 12 + i, c.getCardWidth(), c.getCardHeight());
+            c.setBounds(7, (this.panelCards.getHeight() - this.cardHeight + 180) / 2 - i, c.getCardWidth(), c.getCardHeight());
             c.setLayout(null);
             c.setVisible(true);
             c.coverCard();
             this.panelCards.add(c);
-
             i += 6;
         }
     }
