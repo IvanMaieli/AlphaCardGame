@@ -156,7 +156,6 @@ public class Board extends JFrame {
         this.setVisible(true);
     }
 
-
     public void updateTurnField() {
         this.turnLabel.setText("Turno: " + this.actualTurn + " / 16 - "
         + "Player " + this.actualTurnPlayer.getId());
