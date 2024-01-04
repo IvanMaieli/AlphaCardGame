@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -178,13 +176,16 @@ public class Board extends JFrame {
         this.cards = new LinkedList<>();
 
         for (int i = 0; i < 45; i++) {
-            if(i < 2) this.cards.add(new Nebula(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
-            else if (i < 4) this.cards.add(new Nightmare(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
-            else if (i < 10) this.cards.add(new Gigaorso(i, this.cardWidth, this.cardHeight, this.epicColorCard));
-            else if (i < 14) this.cards.add(new Gigaworm(i, this.cardWidth, this.cardHeight, this.epicColorCard));
-            else if (i < 18) this.cards.add(new AntsHorde(i, this.cardWidth, this.cardHeight, this.stdColorCard));
-            else if (i < 25) this.cards.add(new ElRaton(i, this.cardWidth, this.cardHeight, this.stdColorCard));
-            else if (i < 35) this.cards.add(new CyberWolf(i, this.cardWidth, this.cardHeight, this.stdColorCard));
+            if (i < 1) this.cards.add(new Gigatron(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
+            if(i < 3) this.cards.add(new Nebula(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
+            else if (i < 5) this.cards.add(new Nightmare(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
+            else if (i < 8) this.cards.add(new RoboBruin(i, this.cardWidth, this.cardHeight, this.epicColorCard));
+            else if (i < 11) this.cards.add(new Roborat(i, this.cardWidth, this.cardHeight, this.epicColorCard));
+            else if (i < 14) this.cards.add(new QuantumGrade(i, this.cardWidth, this.cardHeight, this.epicColorCard));
+            else if (i < 18) this.cards.add(new Horde(i, this.cardWidth, this.cardHeight, this.stdColorCard));
+            else if (i < 24) this.cards.add(new ElRaton(i, this.cardWidth, this.cardHeight, this.stdColorCard));
+            else if (i < 32) this.cards.add(new ByteHowler(i, this.cardWidth, this.cardHeight, this.stdColorCard));
+            else if (i < 38) this.cards.add(new TecnoPlatypus(i, this.cardWidth, this.cardHeight, this.epicColorCard));
             else this.cards.add(new Spaceman(i, this.cardWidth, this.cardHeight, this.stdColorCard));
         }
 
