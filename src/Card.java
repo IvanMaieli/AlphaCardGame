@@ -33,7 +33,6 @@ public abstract class Card extends JButton {
         this.name = name;
         this.attack = attack;
         this.defense = defense;
-        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(cardWidth - 20, (int)(cardHeight - (cardHeight * 0.25) - (cardHeight * 0.25)), Image.SCALE_SMOOTH);
         this.backImg = new ImageIcon("raw_images/cards/back_card.jpg").getImage().getScaledInstance(cardWidth, cardHeight, Image.SCALE_SMOOTH);
         this.color = color;
         this.cardWidth = cardWidth;
@@ -54,7 +53,7 @@ public abstract class Card extends JButton {
 
         this.panelSpecs = new JPanel();
         this.panelSpecs.setBounds(0,0,cardWidth, (int)(cardHeight * 0.2));
-        this.panelSpecs.setBackground(stdColorCard);
+        this.panelSpecs.setBackground(this.stdColorCard);
         this.panelSpecs.setBorder(BorderFactory.createRaisedBevelBorder());
         this.panelSpecs.setLayout(null);
         this.panelSpecs.setVisible(true);
@@ -62,63 +61,70 @@ public abstract class Card extends JButton {
 
         this.panelName = new JPanel();
         this.panelName.setBounds(0, (int)(cardHeight - 1.35 * (cardHeight * 0.15)), cardWidth, (int)(cardHeight * 0.15) + 1);
-        this.panelName.setBackground(stdColorCard);
+        this.panelName.setBackground(this.stdColorCard);
         this.panelName.setBorder(BorderFactory.createRaisedBevelBorder());
-        this.panelName.setFont(fontCard);
+        this.panelName.setFont(this.fontCard);
         this.panelName.setLayout(null);
         this.panelName.setVisible(true);
-        this.add(panelName);
+        this.add(this.panelName);
+
+        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(cardWidth, (int) (cardHeight - panelSpecs.getHeight() - panelName.getHeight() - 30), Image.SCALE_SMOOTH);
 
         this.img = new JLabel();
-        this.img.setIcon(new ImageIcon(frontImg));
-        this.img.setBounds(10, 0, cardWidth,(int) (cardHeight - (cardHeight * 0.25) - (cardHeight * 0.001)));
-        this.img.setVisible(true);
-        this.add(img);
+        this.img.setIcon(new ImageIcon(this.frontImg));
+        this.img.setBounds((this.cardWidth - this.img.getIcon().getIconWidth()) / 2 - 2,
+                panelSpecs.getY() + panelSpecs.getHeight() + 15, this.cardWidth,
+                (int) (this.cardHeight - (this.cardHeight * 0.20) - (this.cardHeight * 0.15)));
 
-        int labelWidth = (int) (panelSpecs.getWidth() * 0.42);
+        this.img.setVisible(true);
+        this.add(this.img);
+
+        int labelWidth = (int) (this.panelSpecs.getWidth() * 0.42);
         int labelHeight = 30;
 
-        specsLabel = new JLabel(attack + "/" + defense);
-        specsLabel.setForeground(new Color(235, 212, 203));
-        specsLabel.setFont(fontCard);
-        specsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        specsLabel.setBounds((cardWidth - labelWidth) / 2, (panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
-        specsLabel.setVisible(true);
-        panelSpecs.add(specsLabel);
+        this.specsLabel = new JLabel(attack + "/" + defense);
+        this.specsLabel.setForeground(new Color(235, 212, 203));
+        this.specsLabel.setFont(this.fontCard);
+        this.specsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.specsLabel.setBounds((cardWidth - labelWidth) / 2, (this.panelSpecs.getHeight() - labelHeight) / 2, labelWidth, labelHeight);
+        this.specsLabel.setVisible(true);
+        this.panelSpecs.add(this.specsLabel);
 
         int nameLabelWidth = 150;
-        nameLabel = new JLabel(name);
-        nameLabel.setForeground(new Color(235, 212, 203));
-        nameLabel.setFont(fontCard);
-        nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
-        nameLabel.setBounds((panelName.getWidth() - nameLabelWidth) / 2, (panelName.getHeight() - labelHeight) / 2, nameLabelWidth, labelHeight);
-        nameLabel.setVisible(true);
-        panelName.add(nameLabel);
+        this.nameLabel = new JLabel(name);
+        this.nameLabel.setForeground(new Color(235, 212, 203));
+        this.nameLabel.setFont(this.fontCard);
+        this.nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+        this.nameLabel.setBounds((this.panelName.getWidth() - nameLabelWidth) / 2, (this.panelName.getHeight() - labelHeight) / 2, nameLabelWidth, labelHeight);
+        this.nameLabel.setVisible(true);
+        this.panelName.add(this.nameLabel);
     }
 
 
     public void coverCard() {
-        panelSpecs.setVisible(false);
-        panelName.setVisible(false);
-        img.setIcon(new ImageIcon(backImg));
-        img.setBounds(0,0, cardWidth, cardHeight);
-        img.setVisible(true);
+        this.panelSpecs.setVisible(false);
+        this.panelName.setVisible(false);
+        this.img.setIcon(new ImageIcon(this.backImg));
+        this.img.setBounds(0,0, this.cardWidth, this.cardHeight);
+        this.img.setVisible(true);
         this.setEnabled(false);
     }
 
 
     public void showCard() {
-        panelSpecs.setVisible(true);
-        panelName.setVisible(true);
-        img.setIcon(new ImageIcon(frontImg));
-        img.setBounds((cardWidth - img.getIcon().getIconWidth()) / 2 - 2, (int) (cardHeight * 0.2), cardWidth, (int) (cardHeight - (cardHeight * 0.20) - (cardHeight* 0.15)));
-        img.setVisible(true);
+        this.panelSpecs.setVisible(true);
+        this.panelName.setVisible(true);
+        this.img.setIcon(new ImageIcon(this.frontImg));
+        this.img.setBounds((this.cardWidth - this.img.getIcon().getIconWidth()) / 2 - 2,
+                (int) this.panelSpecs.getY() + this.panelSpecs.getHeight() - 5, this.cardWidth,
+                (int) (this.cardHeight - (this.cardHeight * 0.20) - (this.cardHeight* 0.15)));
+        this.img.setVisible(true);
         this.setEnabled(true);
     }
 
 
     public void updateLabels() {
-        this.specsLabel.setText(attack + "/" + defense);
+        this.specsLabel.setText(this.attack + "/" + this.defense);
         Component[] components = getComponents();
         for (Component c : components)
             c.setBackground(new Color(42, 45, 52));
@@ -127,10 +133,10 @@ public abstract class Card extends JButton {
 
 
     public void changeBkg(int c){
-        attackMode = !attackMode;
+        this.attackMode = !this.attackMode;
         Component[] components = getComponents();
         for (Component comp : components) {
-            comp.setBackground(colors[c]);
+            comp.setBackground(this.colors[c]);
         }
         this.repaint();
     }
@@ -154,7 +160,7 @@ public abstract class Card extends JButton {
 
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
 
@@ -174,12 +180,12 @@ public abstract class Card extends JButton {
 
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
 
     public Color[] getColors() {
-        return colors;
+        return this.colors;
     }
 
 
@@ -190,7 +196,7 @@ public abstract class Card extends JButton {
 
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
 
 
@@ -201,7 +207,7 @@ public abstract class Card extends JButton {
 
 
     public int getAttack() {
-        return attack;
+        return this.attack;
     }
 
 
@@ -211,7 +217,7 @@ public abstract class Card extends JButton {
 
 
     public int getDefense() {
-        return defense;
+        return this.defense;
     }
 
 
@@ -221,7 +227,7 @@ public abstract class Card extends JButton {
 
 
     public Image getFrontImg() {
-        return frontImg;
+        return this.frontImg;
     }
 
 
@@ -231,7 +237,7 @@ public abstract class Card extends JButton {
 
 
     public Image getBackImg() {
-        return backImg;
+        return this.backImg;
     }
 
 
@@ -241,7 +247,7 @@ public abstract class Card extends JButton {
 
 
     public JLabel getImg() {
-        return img;
+        return this.img;
     }
 
 
@@ -251,12 +257,12 @@ public abstract class Card extends JButton {
 
 
     public Color getStdColorCard() {
-        return stdColorCard;
+        return this.stdColorCard;
     }
 
 
     public Color getColor() {
-        return color;
+        return this.color;
     }
 
 
@@ -266,7 +272,7 @@ public abstract class Card extends JButton {
 
 
     public JPanel getPanelSpecs() {
-        return panelSpecs;
+        return this.panelSpecs;
     }
 
 
@@ -276,7 +282,7 @@ public abstract class Card extends JButton {
 
 
     public JPanel getPanelName() {
-        return panelName;
+        return this.panelName;
     }
 
 
@@ -286,7 +292,7 @@ public abstract class Card extends JButton {
 
 
     public JLabel getSpecsLabel() {
-        return specsLabel;
+        return this.specsLabel;
     }
 
 
@@ -296,7 +302,7 @@ public abstract class Card extends JButton {
 
 
     public JLabel getNameLabel() {
-        return nameLabel;
+        return this.nameLabel;
     }
 
 
@@ -306,7 +312,7 @@ public abstract class Card extends JButton {
 
 
     public int getCardWidth() {
-        return cardWidth;
+        return this.cardWidth;
     }
 
 
@@ -316,7 +322,7 @@ public abstract class Card extends JButton {
 
 
     public int getCardHeight() {
-        return cardHeight;
+        return this.cardHeight;
     }
 
 
@@ -326,7 +332,7 @@ public abstract class Card extends JButton {
 
 
     public Font getFontCard() {
-        return fontCard;
+        return this.fontCard;
     }
 
 
@@ -336,7 +342,7 @@ public abstract class Card extends JButton {
 
 
     public boolean isAttackMode() {
-        return attackMode;
+        return this.attackMode;
     }
 
 

@@ -33,89 +33,92 @@ public class Player extends JPanel {
         this.setBackground(new Color(42, 45, 52));
         this.setLayout(null);
 
-        selectedCards = new LinkedList<>();
-        selectedCards.add(null);
-        selectedCards.add(null);
-        selectedCards.add(null);
+        this.selectedCards = new LinkedList<>();
+        this.selectedCards.add(null);
+        this.selectedCards.add(null);
+        this.selectedCards.add(null);
 
-        deck = new LinkedList<>();
+        this.deck = new LinkedList<>();
 
-        fieldWidth = panelWidth / 7 * 3;
-        fieldHeight = (panelHeight - 20) / 2;
+        this.fieldWidth = panelWidth / 7 * 3;
+        this.fieldHeight = (panelHeight - 20) / 2;
 
-        deckPanel = new JPanel();
-        deckPanel.setBounds(10, 10 + fieldHeight * (id - 1), deckWidth, fieldHeight);
-        deckPanel.setBorder(BorderFactory.createLoweredBevelBorder());
-        deckPanel.setBackground(color);
-        deckPanel.setLayout(null);
-        deckPanel.setVisible(true);
-        this.add(deckPanel);
+        this.deckPanel = new JPanel();
+        this.deckPanel.setBounds(10, 10 + this.fieldHeight * (id - 1), this.deckWidth, this.fieldHeight);
+        this.deckPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+        this.deckPanel.setBackground(color);
+        this.deckPanel.setLayout(null);
+        this.deckPanel.setVisible(true);
+        this.add(this.deckPanel);
 
-        field = new JPanel();
-        field.setBounds((panelWidth - fieldWidth) / 2, (10 * 2) + (fieldHeight) - (fieldHeight + 20) * (id - 1),
-                fieldWidth, fieldHeight);
-        field.setBorder(BorderFactory.createLoweredBevelBorder());
-        field.setBackground(color);
-        field.setLayout(null);
-        field.setVisible(true);
-        this.add(field);
+        this.field = new JPanel();
+        this.field.setBounds((panelWidth - this.fieldWidth) / 2,
+                (10 * 2) + (this.fieldHeight) - (this.fieldHeight + 20) * (id - 1),
+                this.fieldWidth, this.fieldHeight);
+        this.field.setBorder(BorderFactory.createLoweredBevelBorder());
+        this.field.setBackground(color);
+        this.field.setLayout(null);
+        this.field.setVisible(true);
+        this.add(this.field);
 
-        fieldName = new JPanel();
+        this.fieldName = new JPanel();
         if(id == 2) {
-            fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 5, (int) field.getY() + fieldHeight - (fieldHeight / 6) * 2,
-                    fieldWidth / 5, fieldHeight / 6);
+            this.fieldName.setBounds((panelWidth - this.fieldWidth) / 2 - this.fieldWidth / 5,
+                    this.field.getY() + this.fieldHeight - (this.fieldHeight / 6) * 2,
+                    this.fieldWidth / 5, this.fieldHeight / 6);
         } else {
-            fieldName.setBounds((panelWidth - fieldWidth) / 2 - fieldWidth / 5, (int) ((10 * 2) + (fieldHeight) - (fieldHeight + 20) * (id - 1)),
-                    fieldWidth / 5, fieldHeight / 6);
+            fieldName.setBounds((panelWidth - this.fieldWidth) / 2 - this.fieldWidth / 5,
+                    ((10 * 2) + (this.fieldHeight) - (this.fieldHeight + 20) * (id - 1)),
+                    this.fieldWidth / 5, this.fieldHeight / 6);
         }
 
-        fieldName.setBackground(new Color(170, 70, 1));
-        fieldName.setBorder(BorderFactory.createLoweredBevelBorder());
-        fieldName.setLayout(null);
-        fieldName.setVisible(true);
-        this.add(fieldName);
+        this.fieldName.setBackground(new Color(170, 70, 1));
+        this.fieldName.setBorder(BorderFactory.createLoweredBevelBorder());
+        this.fieldName.setLayout(null);
+        this.fieldName.setVisible(true);
+        this.add(this.fieldName);
 
-        pName = new JLabel("PLAYER " + id);
-        pName.setFont(font);
-        pName.setForeground(new Color(235, 212, 203));
-        pName.setBounds(10, (fieldName.getHeight() - 40) / 2, 150, 40);
-        pName.setLayout(null);
-        pName.setVisible(true);
-        fieldName.add(pName);
+        this.pName = new JLabel("PLAYER " + id);
+        this.pName.setFont(this.font);
+        this.pName.setForeground(new Color(235, 212, 203));
+        this.pName.setBounds(10, (this.fieldName.getHeight() - 40) / 2, 150, 40);
+        this.pName.setLayout(null);
+        this.pName.setVisible(true);
+        this.fieldName.add(this.pName);
 
-        fieldScore = new JPanel();
-        fieldScore.setBounds(fieldName.getX(), fieldName.getY() + fieldName.getHeight(),
-                fieldName.getWidth(), fieldName.getHeight());
-        fieldScore.setBackground(new Color(170, 70, 1));
-        fieldScore.setBorder(BorderFactory.createLoweredBevelBorder());
-        fieldScore.setLayout(null);
-        fieldScore.setVisible(true);
-        this.add(fieldScore);
+        this.fieldScore = new JPanel();
+        this.fieldScore.setBounds(this.fieldName.getX(), this.fieldName.getY() + this.fieldName.getHeight(),
+                this.fieldName.getWidth(), this.fieldName.getHeight());
+        this.fieldScore.setBackground(new Color(170, 70, 1));
+        this.fieldScore.setBorder(BorderFactory.createLoweredBevelBorder());
+        this.fieldScore.setLayout(null);
+        this.fieldScore.setVisible(true);
+        this.add(this.fieldScore);
 
-        pScore = new JLabel("" + points);
-        pScore.setFont(font);
-        pScore.setForeground(new Color(235, 212, 203));
-        pScore.setBounds(10, (fieldScore.getHeight() - 40) / 2, 150, 40);
-        pScore.setLayout(null);
-        pScore.setVisible(true);
-        fieldScore.add(pScore);
+        this.pScore = new JLabel("" + this.points);
+        this.pScore.setFont(this.font);
+        this.pScore.setForeground(new Color(235, 212, 203));
+        this.pScore.setBounds(10, (this.fieldScore.getHeight() - 40) / 2, 150, 40);
+        this.pScore.setLayout(null);
+        this.pScore.setVisible(true);
+        this.fieldScore.add(this.pScore);
 
-        cardHeight = fieldHeight - 20;
-        cardWidth = (int) (deckWidth - 80) / 7;
+        this.cardHeight = this.fieldHeight - 20;
+        this.cardWidth = (int) (this.deckWidth - 80) / 7;
 
-        validate();
-        repaint();
+        this.validate();
+        this.repaint();
         this.setVisible(true);
     }
 
 
     public void updateScore() {
-        pScore.setText("" + points);
+        this.pScore.setText("" + this.points);
     }
 
 
     public void updateCards(Player player) {
-        for(Card c : selectedCards) {
+        for(Card c : this.selectedCards) {
             if(c != null)
                 c.updateLabels();
         }
@@ -135,29 +138,29 @@ public class Player extends JPanel {
 
     public void updateView() {
         int i = 0;
-        for (Card c : deck) {
+        for (Card c : this.deck) {
             if (c != null) {
-                c.setBounds((10 * (i + 1)) + (cardWidth * i), 10, cardWidth, cardHeight);
+                c.setBounds((10 * (i + 1)) + (this.cardWidth * i), 10, this.cardWidth, this.cardHeight);
                 c.setLayout(null);
                 c.setVisible(true);
-                deckPanel.add(c);
+                this.deckPanel.add(c);
             }
             i++;
         }
-        deckPanel.repaint();
+        this.deckPanel.repaint();
         i = 0;
-        for (Card c : selectedCards) {
+        for (Card c : this.selectedCards) {
             if (c != null) {
-                c.setBounds((10 * (i + 1)) + (cardWidth * i), 10, cardWidth, cardHeight);
+                c.setBounds((10 * (i + 1)) + (this.cardWidth * i), 10, this.cardWidth, this.cardHeight);
                 c.setLayout(null);
                 c.setVisible(true);
-                field.add(c);
+                this.field.add(c);
             }
             i++;
         }
-        updateScore();
+        this.updateScore();
 
-        field.repaint();
+        this.field.repaint();
     }
 
 
@@ -166,21 +169,21 @@ public class Player extends JPanel {
             this.deck.addFirst(c);
             c.setPlayer(this);
         }
-        updateView();
+        this.updateView();
     }
 
 
     public void chooseCards(LinkedList<Card> cards) {
         int i = 0;
         int j = 0;
-        for (Card c : selectedCards) {
+        for (Card c : this.selectedCards) {
             if (c != null) {
                 j = 0;
-                for (Card c2 : deck) {
+                for (Card c2 : this.deck) {
                     if (c2 == null) {
-                        deck.set(j, c);
-                        field.remove((Component) selectedCards.get(i));
-                        selectedCards.set(i, null);
+                        this.deck.set(j, c);
+                        this.field.remove((Component) this.selectedCards.get(i));
+                        this.selectedCards.set(i, null);
                         break;
                     }
                     j++;
@@ -190,35 +193,35 @@ public class Player extends JPanel {
         }
 
         i = 0;
-        for (Card c : deck) {
+        for (Card c : this.deck) {
             if (c == null) {
-                deck.set(i, cards.removeFirst());
-                deck.get(i).setPlayer(this);
+                this.deck.set(i, cards.removeFirst());
+                this.deck.get(i).setPlayer(this);
             }
             i++;
         }
-        for (Card c : deck) {
+        for (Card c : this.deck) {
             c.showCard();
         }
-        updateView();
+        this.updateView();
     }
 
 
     public void cardClicked(Card card) {
-        if (turn) {
+        if (this.turn) {
             if (this.board.isPhasePositioning()) {
-                if (deck.contains(card)) {
-                    if (numberOfElements(selectedCards) == 3) {
+                if (this.deck.contains(card)) {
+                    if (numberOfElements(this.selectedCards) == 3) {
                         disableDeck();
                     } else {
                         int i = 0;
-                        for (Card c : deck) {
+                        for (Card c : this.deck) {
                             if (c != null) {
                                 if (c.getId() == card.getId()) {
                                     int j = 0;
-                                    for (Card z : selectedCards) {
+                                    for (Card z : this.selectedCards) {
                                         if (z == null) {
-                                            selectedCards.set(j, deck.get(i));
+                                            this.selectedCards.set(j, this.deck.get(i));
                                             break;
                                         }
                                         j++;
@@ -228,17 +231,17 @@ public class Player extends JPanel {
                             }
                             i++;
                         }
-                        deckPanel.remove((Component) card);
-                        deck.set(i, null);
+                        this.deckPanel.remove((Component) card);
+                        this.deck.set(i, null);
                     }
                 } else {
                     int i = 0;
-                    for (Card c : selectedCards) {
+                    for (Card c : this.selectedCards) {
                         boolean exit = false;
                         if (c != null) {
                             if (c.getId() == card.getId()) {
                                 int j = 0;
-                                for (Card s : deck) {
+                                for (Card s : this.deck) {
                                     if (s == null) {
                                         exit = true;
                                         break;
@@ -246,16 +249,16 @@ public class Player extends JPanel {
                                     j++;
                                 }
                                 if (exit) {
-                                    deck.set(j, c);
-                                    field.remove((Component) card);
-                                    selectedCards.set(i, null);
+                                    this.deck.set(j, c);
+                                    this.field.remove((Component) card);
+                                    this.selectedCards.set(i, null);
                                     break;
                                 }
                             }
                         }
                         i++;
                     }
-                    enableDeck();
+                    this.enableDeck();
                 }
             } else {
                 this.board.placeAttack(card, this);
@@ -268,7 +271,7 @@ public class Player extends JPanel {
 
 
     public void changeTurn() {
-        this.turn = !turn;
+        this.turn = !this.turn;
     }
 
 
@@ -282,7 +285,7 @@ public class Player extends JPanel {
 
 
     public void waitTurn() {
-        for (Card c : deck)
+        for (Card c : this.deck)
             if (c != null)
                 c.coverCard();
         updateView();
@@ -290,7 +293,7 @@ public class Player extends JPanel {
 
 
     public boolean checkSelectedCards() {
-        if (numberOfElements(selectedCards) < 3) {
+        if (numberOfElements(this.selectedCards) < 3) {
             JOptionPane.showMessageDialog(null, "Devi selezionare 3 carte!");
             return false;
         }
@@ -299,7 +302,7 @@ public class Player extends JPanel {
 
 
     public void enableDeck() {
-        for (Card c : deck)
+        for (Card c : this.deck)
             if(c != null)
                 c.setEnabled(true);
     }
@@ -309,7 +312,7 @@ public class Player extends JPanel {
         enableField();
         for (int i = 0; i < v; i++) {
             int j = 0;
-            for (Card c : selectedCards) {
+            for (Card c : this.selectedCards) {
                 if (vet[i] == j)
                     c.setEnabled(false);
                 j++;
@@ -319,28 +322,28 @@ public class Player extends JPanel {
 
 
     public void disableDeck() {
-        for (Card c : deck)
+        for (Card c : this.deck)
             if(c != null)
                 c.setEnabled(false);
     }
 
 
     public void enableField() {
-        for (Card c : selectedCards)
+        for (Card c : this.selectedCards)
             if(c != null)
                 c.setEnabled(true);
     }
 
 
     public void disableField() {
-        for (Card c : selectedCards)
+        for (Card c : this.selectedCards)
             if(c != null)
                 c.setEnabled(false);
     }
 
 
     public JPanel getDeckPanel() {
-        return deckPanel;
+        return this.deckPanel;
     }
 
 
@@ -350,7 +353,7 @@ public class Player extends JPanel {
 
 
     public JPanel getField() {
-        return field;
+        return this.field;
     }
 
 
@@ -360,7 +363,7 @@ public class Player extends JPanel {
 
 
     public JPanel getFieldName() {
-        return fieldName;
+        return this.fieldName;
     }
 
 
@@ -370,7 +373,7 @@ public class Player extends JPanel {
 
 
     public LinkedList<Card> getDeck() {
-        return deck;
+        return this.deck;
     }
 
 
@@ -380,7 +383,7 @@ public class Player extends JPanel {
 
 
     public LinkedList<Card> getSelectedCards() {
-        return selectedCards;
+        return this.selectedCards;
     }
 
 
@@ -390,7 +393,7 @@ public class Player extends JPanel {
 
 
     public int getDeckWidth() {
-        return deckWidth;
+        return this.deckWidth;
     }
 
 
@@ -400,7 +403,7 @@ public class Player extends JPanel {
 
 
     public int getFieldWidth() {
-        return fieldWidth;
+        return this.fieldWidth;
     }
 
 
@@ -410,12 +413,12 @@ public class Player extends JPanel {
 
 
     public int getFieldHeight() {
-        return fieldHeight;
+        return this.fieldHeight;
     }
 
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
 
@@ -430,7 +433,7 @@ public class Player extends JPanel {
 
 
     public int getCardWidth() {
-        return cardWidth;
+        return this.cardWidth;
     }
 
 
@@ -440,7 +443,7 @@ public class Player extends JPanel {
 
 
     public int getCardHeight() {
-        return cardHeight;
+        return this.cardHeight;
     }
 
 
@@ -450,7 +453,7 @@ public class Player extends JPanel {
 
 
     public boolean isTurn() {
-        return turn;
+        return this.turn;
     }
 
 
@@ -460,7 +463,7 @@ public class Player extends JPanel {
 
 
     public Board getBoard() {
-        return board;
+        return this.board;
     }
 
 
@@ -470,7 +473,7 @@ public class Player extends JPanel {
 
 
     public int getPoints() {
-        return points;
+        return this.points;
     }
 
 
