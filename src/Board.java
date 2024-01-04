@@ -9,9 +9,9 @@ import java.util.LinkedList;
 
 public class Board extends JFrame {
     private JPanel buttonField;
+    private JPanel panelCards;
     private JPanel turnField;
     private JLabel turnLabel;
-    private JLabel actualPlayerLabel;
     public JButton attackButton;
     private JButton positioningButton;
     private JButton changeTurnButton;
@@ -101,20 +101,17 @@ public class Board extends JFrame {
 
         this.turnField = new JPanel();
         this.turnField.setBackground(new Color(170, 70, 1));
-        this.turnField.setBounds((int)((width - screenWidth / 100 * 0.8) / 7 * 0.1), (height - (height / 12) - 45) / 2, (int)(buttonFieldWidth / 1.5), height / 12);
+        this.turnField.setBounds(this.buttonField.getX(),this.buttonField.getY() - (height / 16) - 10, this.buttonField.getWidth(), height / 16);
         this.turnField.setBorder(BorderFactory.createLoweredBevelBorder());
         this.turnField.setLayout(null);
         this.turnField.setVisible(true);
         this.add(this.turnField);
 
-        this.turnLabel = new JLabel("Turno: " + this.actualTurn + " / 22");
-        this.turnLabel.setFont(this.buttonFont);
-        this.turnLabel.setForeground(new Color(235, 212, 203));
-        this.turnLabel.setBounds(10, (this.turnField.getHeight() - (this.turnField.getHeight() / 6)) / 4,
-                this.turnField.getWidth(),this.turnField.getHeight() / 6);
-        this.turnLabel.setLayout(null);
-        this.turnLabel.setVisible(true);
-        this.turnField.add(this.turnLabel);
+        this.panelCards = new JPanel();
+        this.panelCards.setBackground(new Color(235, 212, 203));
+        this.panelCards.setBounds(20, this.turnField.getY() , cardWidth + 15, this.turnField.getHeight() + this.buttonField.getHeight() + 10);
+        this.panelCards.setVisible(true);
+        this.add(this.panelCards);
 
         this.attackOrder = new int[3];
         this.attOrderCont = 0;
@@ -136,14 +133,17 @@ public class Board extends JFrame {
         this.actualTurnPlayer = p1;
         this.actualWaitPlayer = p2;
 
-        this.actualPlayerLabel = new JLabel("Player " + this.actualTurnPlayer.getId());
-        this.actualPlayerLabel.setFont(this.buttonFont);
-        this.actualPlayerLabel.setForeground(new Color(235, 212, 203));
-        this.actualPlayerLabel.setBounds(10, (this.turnField.getHeight() - (this.turnField.getHeight() / 6)) / 4 * 3,
-                this.turnField.getWidth(),this.turnField.getHeight() / 6);
-        this.actualPlayerLabel.setLayout(null);
-        this.actualPlayerLabel.setVisible(true);
-        this.turnField.add(this.actualPlayerLabel);
+        this.turnLabel = new JLabel("Turno: " + this.actualTurn + " / 7 - "
+                + "Player " + this.actualTurnPlayer.getId());
+        this.turnLabel.setFont(this.buttonFont);
+        this.turnLabel.setForeground(new Color(235, 212, 203));
+        this.turnLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.turnLabel.setBounds(0, 0,
+                this.turnField.getWidth(), this.turnField.getHeight());
+        this.turnLabel.setLayout(null);
+        this.turnLabel.setVisible(true);
+        this.turnField.add(this.turnLabel);
+
 
         this.mix();
 
@@ -155,8 +155,8 @@ public class Board extends JFrame {
 
 
     public void updateTurnField() {
-        this.turnLabel.setText("Turno: " + this.actualTurn + " / 22");
-        this.actualPlayerLabel.setText("Player " + this.actualTurnPlayer.getId());
+        this.turnLabel.setText("Turno: " + this.actualTurn + " / 7 - "
+        + "Player " + this.actualTurnPlayer.getId());
     }
 
 
@@ -174,7 +174,7 @@ public class Board extends JFrame {
     private void mix() {
         this.cards = new LinkedList<>();
 
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 50; i++) {
             if(i < 2) this.cards.add(new Nebula(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
             else if (i < 4) this.cards.add(new Nightmare(i, this.cardWidth, this.cardHeight, this.legendaryColorCard));
             else if (i < 10) this.cards.add(new Gigaorso(i, this.cardWidth, this.cardHeight, this.epicColorCard));
@@ -198,7 +198,20 @@ public class Board extends JFrame {
         this.p1.giveCards(deckP1);
         this.p2.giveCards(deckP2);
 
+        printDeck();
+
         repaint();
+    }
+
+    public void printDeck() {
+        int i = 0;
+        for (Card c : this.cards) {
+            c.setBounds(10, 10 + i, c.getCardWidth(), c.getCardHeight());
+            c.setLayout(null);
+            c.setVisible(true);
+            this.panelCards.add(c);
+            i += 1;
+        }
     }
 
 
@@ -345,7 +358,7 @@ public class Board extends JFrame {
             }
 
             if (e.getSource() == attackButton) {
-                if (actualTurn == 6) {
+                if (actualTurn == 16) {
                     attack();
                     attackButton.setEnabled(false);
                     changeTurnButton.setText("TERMINA");
