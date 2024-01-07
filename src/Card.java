@@ -2,8 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 public abstract class Card extends JButton {
 
@@ -199,14 +198,16 @@ public abstract class Card extends JButton {
         return this.getId() == temp.getId();
     }
 
+
     protected void cardClicked() {
         //metodo che invoca il metodo del click sulla carta del player da poter usare
         //nella classe di ascolto
         this.player.cardClicked(this);
     }
 
+
     public int getId() {
-        return this.id;
+        return id;
     }
 
 
@@ -215,14 +216,29 @@ public abstract class Card extends JButton {
     }
 
 
+    public Player getPlayer() {
+        return player;
+    }
+
+
     public void setPlayer(Player player) {
         this.player = player;
     }
 
 
+    public Color[] getColors() {
+        return colors;
+    }
+
+
+    public void setColors(Color[] colors) {
+        this.colors = colors;
+    }
+
+
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
 
@@ -233,7 +249,7 @@ public abstract class Card extends JButton {
 
 
     public int getAttack() {
-        return this.attack;
+        return attack;
     }
 
 
@@ -243,7 +259,7 @@ public abstract class Card extends JButton {
 
 
     public int getDefense() {
-        return this.defense;
+        return defense;
     }
 
 
@@ -252,8 +268,43 @@ public abstract class Card extends JButton {
     }
 
 
+    public JLabel getImg() {
+        return img;
+    }
+
+
+    public void setImg(JLabel img) {
+        this.img = img;
+    }
+
+
+    public Image getFrontImg() {
+        return frontImg;
+    }
+
+
+    public void setFrontImg(Image frontImg) {
+        this.frontImg = frontImg;
+    }
+
+
+    public Image getBackImg() {
+        return backImg;
+    }
+
+
+    public void setBackImg(Image backImg) {
+        this.backImg = backImg;
+    }
+
+
+    public Color getStdColorCard() {
+        return stdColorCard;
+    }
+
+
     public Color getColor() {
-        return this.color;
+        return color;
     }
 
 
@@ -262,8 +313,48 @@ public abstract class Card extends JButton {
     }
 
 
+    public JPanel getPanelSpecs() {
+        return panelSpecs;
+    }
+
+
+    public void setPanelSpecs(JPanel panelSpecs) {
+        this.panelSpecs = panelSpecs;
+    }
+
+
+    public JLabel getSpecsLabel() {
+        return specsLabel;
+    }
+
+
+    public void setSpecsLabel(JLabel specsLabel) {
+        this.specsLabel = specsLabel;
+    }
+
+
+    public JPanel getPanelName() {
+        return panelName;
+    }
+
+
+    public void setPanelName(JPanel panelName) {
+        this.panelName = panelName;
+    }
+
+
+    public JLabel getNameLabel() {
+        return nameLabel;
+    }
+
+
+    public void setNameLabel(JLabel nameLabel) {
+        this.nameLabel = nameLabel;
+    }
+
+
     public int getCardWidth() {
-        return this.cardWidth;
+        return cardWidth;
     }
 
 
@@ -273,7 +364,7 @@ public abstract class Card extends JButton {
 
 
     public int getCardHeight() {
-        return this.cardHeight;
+        return cardHeight;
     }
 
 

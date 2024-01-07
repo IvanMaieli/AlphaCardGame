@@ -467,8 +467,18 @@ public class Player extends JPanel {
     }
 
 
+    public int getPoints() {
+        return points;
+    }
+
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+
     public JPanel getDeckPanel() {
-        return this.deckPanel;
+        return deckPanel;
     }
 
 
@@ -478,7 +488,7 @@ public class Player extends JPanel {
 
 
     public JPanel getField() {
-        return this.field;
+        return field;
     }
 
 
@@ -488,7 +498,7 @@ public class Player extends JPanel {
 
 
     public JPanel getFieldName() {
-        return this.fieldName;
+        return fieldName;
     }
 
 
@@ -497,8 +507,38 @@ public class Player extends JPanel {
     }
 
 
+    public JLabel getpName() {
+        return pName;
+    }
+
+
+    public void setpName(JLabel pName) {
+        this.pName = pName;
+    }
+
+
+    public JPanel getFieldScore() {
+        return fieldScore;
+    }
+
+
+    public void setFieldScore(JPanel fieldScore) {
+        this.fieldScore = fieldScore;
+    }
+
+
+    public JLabel getpScore() {
+        return pScore;
+    }
+
+
+    public void setpScore(JLabel pScore) {
+        this.pScore = pScore;
+    }
+
+
     public LinkedList<Card> getDeck() {
-        return this.deck;
+        return deck;
     }
 
 
@@ -508,7 +548,7 @@ public class Player extends JPanel {
 
 
     public LinkedList<Card> getSelectedCards() {
-        return this.selectedCards;
+        return selectedCards;
     }
 
 
@@ -518,7 +558,7 @@ public class Player extends JPanel {
 
 
     public int getDeckWidth() {
-        return this.deckWidth;
+        return deckWidth;
     }
 
 
@@ -527,8 +567,18 @@ public class Player extends JPanel {
     }
 
 
+    public int getId() {
+        return id;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
     public int getFieldWidth() {
-        return this.fieldWidth;
+        return fieldWidth;
     }
 
 
@@ -538,17 +588,7 @@ public class Player extends JPanel {
 
 
     public int getFieldHeight() {
-        return this.fieldHeight;
-    }
-
-
-    public int getId() {
-        return this.id;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
+        return fieldHeight;
     }
 
 
@@ -558,7 +598,7 @@ public class Player extends JPanel {
 
 
     public int getCardWidth() {
-        return this.cardWidth;
+        return cardWidth;
     }
 
 
@@ -568,7 +608,7 @@ public class Player extends JPanel {
 
 
     public int getCardHeight() {
-        return this.cardHeight;
+        return cardHeight;
     }
 
 
@@ -578,7 +618,7 @@ public class Player extends JPanel {
 
 
     public boolean isTurn() {
-        return this.turn;
+        return turn;
     }
 
 
@@ -588,22 +628,12 @@ public class Player extends JPanel {
 
 
     public Board getBoard() {
-        return this.board;
+        return board;
     }
 
 
     public void setBoard(Board board) {
         this.board = board;
-    }
-
-
-    public int getPoints() {
-        return this.points;
-    }
-
-
-    public void setPoints(int points) {
-        this.points = points;
     }
 
 }

@@ -6,14 +6,17 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Menu extends JFrame {
+
+    //pulsante per iniziare a giocare
     private JButton play;
+
+    //pulsante per scoprire le regole del gioco
     private JButton rules;
-    private Board board;
-    private Rule rule;
 
     public Menu() {
         this.setTitle("Deep Space launcher");
 
+        //prendo le dimensioni dello schermo per rendere il programma responsive
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
@@ -22,6 +25,7 @@ public class Menu extends JFrame {
         int width = screenWidth / 4;
         int height = screenHeight / 5;
 
+        //proprietà del menù
         this.getContentPane().setBackground(new Color(42, 45, 52));
         this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height);
         this.setLayout(null);
@@ -33,6 +37,8 @@ public class Menu extends JFrame {
         int buttonHeight = height / 6;
 
         Font font = new Font("Helvetica", Font.BOLD, 16);
+
+        //proprieta del pulsante di gioco
         this.play = new JButton("PLAY");
         this.play.setFont(font);
         this.play.setBackground(new Color(85, 87, 93));
@@ -41,8 +47,10 @@ public class Menu extends JFrame {
         this.play.setLayout(null);
         this.play.setFocusPainted(false);
         this.play.addActionListener(new MenuListener());
+        this.play.setVisible(true);
         this.add(this.play);
 
+        //proprieta del pulsante delle regole
         this.rules = new JButton("RULES");
         this.rules.setFont(font);
         this.rules.setBackground(new Color(85, 87, 93));
@@ -51,20 +59,49 @@ public class Menu extends JFrame {
         this.rules.setLayout(null);
         this.rules.setFocusPainted(false);
         this.rules.addActionListener(new MenuListener());
+        this.rules.setVisible(true);
         this.add(this.rules);
 
     }
 
+
+    public JButton getPlay() {
+        return play;
+    }
+
+
+    public void setPlay(JButton play) {
+        this.play = play;
+    }
+
+
+    public JButton getRules() {
+        return rules;
+    }
+
+
+    public void setRules(JButton rules) {
+        this.rules = rules;
+    }
+
+
     private class MenuListener implements ActionListener {
+        //classe di ascolto che implementa l'interfaccia ActionListener per il click sui pulsanti
+
         @Override
         public void actionPerformed(ActionEvent e) {
+            //se viene premuto il pulsante play
             if (e.getSource() == play) {
-                board = new Board();
+                //si apre una finestra di gioco
+                new Board();
+                //e si chiude questa
                 dispose();
             }
 
+            //se viene premuto quello delle regole
             if (e.getSource() == rules) {
-                rule = new Rule();
+                //si apre la finestra delle regole ma non si chiude questa
+                new Rule();
             }
         }
     }

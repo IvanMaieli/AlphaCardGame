@@ -20,7 +20,7 @@ public class Board extends JFrame {
     private JLabel turnLabel;
 
     //pulsante per confermare l'attacco
-    public JButton attackButton;
+    private JButton attackButton;
 
     //pulsante per schierare le carte
     private JButton positioningButton;
@@ -308,24 +308,6 @@ public class Board extends JFrame {
     }
 
 
-    public boolean isPhasePositioning() {
-        return this.phasePositioning;
-    }
-
-
-    public void setPhasePositioning(boolean phasePositioning) {
-        this.phasePositioning = phasePositioning;
-    }
-
-
-    public int getActualTurn() {
-        return this.actualTurn;
-    }
-
-
-    public void setActualTurn(int actualTurn) {
-        this.actualTurn = actualTurn;
-    }
 
 
     public void placeAttack(Card card, Player player) {
@@ -457,6 +439,220 @@ public class Board extends JFrame {
             this.attackOrder[i] = -1;
             this.defenseOrder[i] = -1;
         }
+    }
+
+    public JPanel getButtonField() {
+        return buttonField;
+    }
+
+
+    public void setButtonField(JPanel buttonField) {
+        this.buttonField = buttonField;
+    }
+
+
+    public JPanel getPanelCards() {
+        return panelCards;
+    }
+
+
+    public void setPanelCards(JPanel panelCards) {
+        this.panelCards = panelCards;
+    }
+
+
+    public JPanel getTurnField() {
+        return turnField;
+    }
+
+
+    public void setTurnField(JPanel turnField) {
+        this.turnField = turnField;
+    }
+
+
+    public JLabel getTurnLabel() {
+        return turnLabel;
+    }
+
+
+    public void setTurnLabel(JLabel turnLabel) {
+        this.turnLabel = turnLabel;
+    }
+
+
+    public JButton getAttackButton() {
+        return attackButton;
+    }
+
+
+    public void setAttackButton(JButton attackButton) {
+        this.attackButton = attackButton;
+    }
+
+
+    public JButton getPositioningButton() {
+        return positioningButton;
+    }
+
+
+    public void setPositioningButton(JButton positioningButton) {
+        this.positioningButton = positioningButton;
+    }
+
+
+    public JButton getChangeTurnButton() {
+        return changeTurnButton;
+    }
+
+
+    public void setChangeTurnButton(JButton changeTurnButton) {
+        this.changeTurnButton = changeTurnButton;
+    }
+
+
+    public LinkedList<Card> getCards() {
+        return cards;
+    }
+
+
+    public void setCards(LinkedList<Card> cards) {
+        this.cards = cards;
+    }
+
+
+    public int getCardWidth() {
+        return cardWidth;
+    }
+
+
+    public void setCardWidth(int cardWidth) {
+        this.cardWidth = cardWidth;
+    }
+
+
+    public int getCardHeight() {
+        return cardHeight;
+    }
+
+
+    public void setCardHeight(int cardHeight) {
+        this.cardHeight = cardHeight;
+    }
+
+
+    public int getAttOrderCont() {
+        return attOrderCont;
+    }
+
+
+    public void setAttOrderCont(int attOrderCont) {
+        this.attOrderCont = attOrderCont;
+    }
+
+
+    public int getDefOrderCont() {
+        return defOrderCont;
+    }
+
+
+    public void setDefOrderCont(int defOrderCont) {
+        this.defOrderCont = defOrderCont;
+    }
+
+
+    public int[] getAttackOrder() {
+        return attackOrder;
+    }
+
+
+    public void setAttackOrder(int[] attackOrder) {
+        this.attackOrder = attackOrder;
+    }
+
+
+    public int[] getDefenseOrder() {
+        return defenseOrder;
+    }
+
+
+    public void setDefenseOrder(int[] defenseOrder) {
+        this.defenseOrder = defenseOrder;
+    }
+
+
+    public Player getP1() {
+        return p1;
+    }
+
+
+    public void setP1(Player p1) {
+        this.p1 = p1;
+    }
+
+
+    public Player getP2() {
+        return p2;
+    }
+
+
+    public void setP2(Player p2) {
+        this.p2 = p2;
+    }
+
+
+    public Color getStdColorCard() {
+        return stdColorCard;
+    }
+
+
+    public Color getEpicColorCard() {
+        return epicColorCard;
+    }
+
+
+    public Color getLegendaryColorCard() {
+        return legendaryColorCard;
+    }
+
+
+    public boolean isPhasePositioning() {
+        return phasePositioning;
+    }
+
+
+    public void setPhasePositioning(boolean phasePositioning) {
+        this.phasePositioning = phasePositioning;
+    }
+
+
+    public int getActualTurn() {
+        return actualTurn;
+    }
+
+
+    public void setActualTurn(int actualTurn) {
+        this.actualTurn = actualTurn;
+    }
+
+
+    public Player getActualTurnPlayer() {
+        return actualTurnPlayer;
+    }
+
+
+    public void setActualTurnPlayer(Player actualTurnPlayer) {
+        this.actualTurnPlayer = actualTurnPlayer;
+    }
+
+
+    public Player getActualWaitPlayer() {
+        return actualWaitPlayer;
+    }
+
+
+    public void setActualWaitPlayer(Player actualWaitPlayer) {
+        this.actualWaitPlayer = actualWaitPlayer;
     }
 
 
