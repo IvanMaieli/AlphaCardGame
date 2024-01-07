@@ -47,7 +47,7 @@ public class Board extends JFrame {
         this.cardHeight = (panelHeight / 2) - 20;
         this.cardWidth = (int) (panelWidth - 80) / 7;
 
-        this.setTitle("CyberAttack");
+        this.setTitle("DeepSpace by Ivan Maieli");
         this.getContentPane().setBackground(this.stdColorCard);
         this.setBounds((screenWidth - width) / 2, (screenHeight - height) / 2, width, height - 25);
         this.setLayout(null);
