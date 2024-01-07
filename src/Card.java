@@ -6,24 +6,59 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public abstract class Card extends JButton {
+
+    //identificatore univoco di una carta
     private int id;
+
+    //il giocatore che possiede la carta
     protected Player player = null;
+
+    //i colori che possono assumere le carte quando vengono selezionati nella fase di attacco
     private Color[] colors;
+
+    //nome della carta
     private String name;
+
+    //danno che infliggono alle altre carte
     private int attack;
+
+    //vita della carta
     private int defense;
-    private Image frontImg;
-    private Image backImg;
+
+    //label che contiene l'immagine
     private JLabel img;
+
+    //immagine della carta
+    private Image frontImg;
+
+    //retro della carta
+    private Image backImg;
+
+    //colore standard (creato per comodità)
     private final Color stdColorCard = new Color(42, 45, 52);
+
+    //colore della carta
     private Color color;
+
+    //pannello con le statistiche della carta
     private JPanel panelSpecs;
-    private JPanel panelName;
+
+    //label che contiene le statistiche della carta
     private JLabel specsLabel;
+
+    //pannello con il nome della carta
+    private JPanel panelName;
+
+    //label che contiene il nome della carta
     private JLabel nameLabel;
+
+    //larghezza della carta
     private int cardWidth;
+
+    //altezza della carta
     private int cardHeight;
-    private boolean attackMode = false;
+
+    //font della classe
     private Font fontCard = new Font("Helvetica", Font.BOLD, 14);
 
 
@@ -38,11 +73,12 @@ public abstract class Card extends JButton {
         this.cardWidth = cardWidth;
         this.cardHeight = cardHeight;
 
-        colors = new Color[3];
-        colors[0] = new Color(111, 29, 27);
-        colors[1] = new Color(36, 130, 50);
-        colors[2] = new Color(0, 117, 162);
+        this.colors = new Color[3];
+        this.colors[0] = new Color(111, 29, 27);
+        this.colors[1] = new Color(36, 130, 50);
+        this.colors[2] = new Color(0, 117, 162);
 
+        //proprietà della classe
         this.setSize(cardWidth, cardHeight);
         this.setBorder(BorderFactory.createRaisedBevelBorder());
         this.setLayout(null);
@@ -51,6 +87,7 @@ public abstract class Card extends JButton {
         this.addActionListener(new CardActionListener());
         this.setVisible(true);
 
+        //proprietà del pannello del nome della carta
         this.panelName = new JPanel();
         this.panelName.setBounds(0,0, this.cardWidth, this.cardHeight / 6);
         this.panelName.setBackground(this.stdColorCard);
@@ -60,6 +97,16 @@ public abstract class Card extends JButton {
         this.panelName.setVisible(true);
         this.add(this.panelName);
 
+        //proprietà della label che contiene il nome della carta
+        this.nameLabel = new JLabel(name);
+        this.nameLabel.setForeground(new Color(235, 212, 203));
+        this.nameLabel.setFont(this.fontCard);
+        this.nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+        this.nameLabel.setBounds(0, 0, cardWidth, this.panelName.getHeight());
+        this.nameLabel.setVisible(true);
+        this.panelName.add(this.nameLabel);
+
+        //proprietà del pannello delle statistiche della carta
         this.panelSpecs = new JPanel();
         this.panelSpecs.setBounds(0, this.panelName.getHeight() + 2,
                 this.cardWidth, (int) (this.cardHeight / 7.5));
@@ -69,19 +116,7 @@ public abstract class Card extends JButton {
         this.panelSpecs.setVisible(true);
         this.add(panelSpecs);
 
-
-        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(this.cardWidth,
-                this.cardHeight - this.panelName.getHeight() - this.panelSpecs.getHeight() - (cardHeight / 8) - 2,
-                Image.SCALE_SMOOTH);
-
-        this.img = new JLabel();
-        this.img.setIcon(new ImageIcon(this.frontImg));
-        this.img.setBounds((this.cardWidth - this.img.getIcon().getIconWidth()) / 2,
-                this.panelName.getHeight() + this.panelSpecs.getHeight() + 2, this.cardWidth,
-                this.cardHeight - this.panelName.getHeight() - this.panelSpecs.getHeight() - (cardHeight / 8));
-        this.img.setVisible(true);
-        this.add(this.img);
-
+        //proprietà della label che contiene le statistiche della carta
         this.specsLabel = new JLabel(attack + "/" + defense);
         this.specsLabel.setForeground(new Color(235, 212, 203));
         this.specsLabel.setFont(this.fontCard);
@@ -90,18 +125,25 @@ public abstract class Card extends JButton {
         this.specsLabel.setVisible(true);
         this.panelSpecs.add(this.specsLabel);
 
-        int nameLabelWidth = 150;
-        this.nameLabel = new JLabel(name);
-        this.nameLabel.setForeground(new Color(235, 212, 203));
-        this.nameLabel.setFont(this.fontCard);
-        this.nameLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
-        this.nameLabel.setBounds(0, 0, cardWidth, this.panelName.getHeight());
-        this.nameLabel.setVisible(true);
-        this.panelName.add(this.nameLabel);
+        //proprietà dell'immagine della carta, stretchata per potersi adattare al layout della carta
+        this.frontImg = new ImageIcon(imgPath).getImage().getScaledInstance(this.cardWidth,
+                this.cardHeight - this.panelName.getHeight() - this.panelSpecs.getHeight() - (cardHeight / 8) - 2,
+                Image.SCALE_SMOOTH);
+
+        //label che contiene come icona l'immagine della carta
+        this.img = new JLabel();
+        this.img.setIcon(new ImageIcon(this.frontImg));
+        this.img.setBounds((this.cardWidth - this.img.getIcon().getIconWidth()) / 2,
+                this.panelName.getHeight() + this.panelSpecs.getHeight() + 2, this.cardWidth,
+                this.cardHeight - this.panelName.getHeight() - this.panelSpecs.getHeight() - (cardHeight / 8));
+        this.img.setVisible(true);
+        this.add(this.img);
+
     }
 
 
     public void coverCard() {
+        //questo metodo oscura tutto e mette l'immagine del retro della carta, comune a tutte
         this.panelSpecs.setVisible(false);
         this.panelName.setVisible(false);
         this.img.setIcon(new ImageIcon(this.backImg));
@@ -112,6 +154,7 @@ public abstract class Card extends JButton {
 
 
     public void showCard() {
+        //questo metodo rende visibile la carta
         this.panelSpecs.setVisible(true);
         this.panelName.setVisible(true);
         this.img.setIcon(new ImageIcon(this.frontImg));
@@ -124,6 +167,7 @@ public abstract class Card extends JButton {
 
 
     public void updateLabels() {
+        //aggiorno la GUI delle carte con la nuova vita rimanente e le rimetto al colore standard
         this.specsLabel.setText(this.attack + "/" + this.defense);
         Component[] components = getComponents();
         for (Component c : components)
@@ -133,7 +177,8 @@ public abstract class Card extends JButton {
 
 
     public void changeBkg(int c){
-        this.attackMode = !this.attackMode;
+        //cambio il colore della carta in base all'ordine di attacco e di difesa
+        //(implementato in placeAttack() e placeDefense())
         Component[] components = getComponents();
         for (Component comp : components) {
             comp.setBackground(this.colors[c]);
@@ -144,20 +189,21 @@ public abstract class Card extends JButton {
 
     @Override
     public boolean equals(Object o) {
-        if ( o == null) return false;
+        //faccio un override del metodo speciale equals per fare il controllo dell'uguaglianza
+        //delle carte in base all'id
+
+        //se il confronto viene effettuato tra elementi che sono null o non compatibili
+        if (o == null) return false;
         if (!(o instanceof Card)) return false;
         Card temp = (Card) o;
         return this.getId() == temp.getId();
     }
 
-
-    protected class CardActionListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            cardClicked();
-        }
+    protected void cardClicked() {
+        //metodo che invoca il metodo del click sulla carta del player da poter usare
+        //nella classe di ascolto
+        this.player.cardClicked(this);
     }
-
 
     public int getId() {
         return this.id;
@@ -171,26 +217,6 @@ public abstract class Card extends JButton {
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-
-
-    protected void cardClicked() {
-        this.player.cardClicked(this);
-    }
-
-
-    public Player getPlayer() {
-        return this.player;
-    }
-
-
-    public Color[] getColors() {
-        return this.colors;
-    }
-
-
-    public void setColors(Color[] colors) {
-        this.colors = colors;
     }
 
 
@@ -226,41 +252,6 @@ public abstract class Card extends JButton {
     }
 
 
-    public Image getFrontImg() {
-        return this.frontImg;
-    }
-
-
-    public void setFrontImg(Image frontImg) {
-        this.frontImg = frontImg;
-    }
-
-
-    public Image getBackImg() {
-        return this.backImg;
-    }
-
-
-    public void setBackImg(Image backImg) {
-        this.backImg = backImg;
-    }
-
-
-    public JLabel getImg() {
-        return this.img;
-    }
-
-
-    public void setImg(JLabel img) {
-        this.img = img;
-    }
-
-
-    public Color getStdColorCard() {
-        return this.stdColorCard;
-    }
-
-
     public Color getColor() {
         return this.color;
     }
@@ -268,46 +259,6 @@ public abstract class Card extends JButton {
 
     public void setColor(Color color) {
         this.color = color;
-    }
-
-
-    public JPanel getPanelSpecs() {
-        return this.panelSpecs;
-    }
-
-
-    public void setPanelSpecs(JPanel panelSpecs) {
-        this.panelSpecs = panelSpecs;
-    }
-
-
-    public JPanel getPanelName() {
-        return this.panelName;
-    }
-
-
-    public void setPanelName(JPanel panelName) {
-        this.panelName = panelName;
-    }
-
-
-    public JLabel getSpecsLabel() {
-        return this.specsLabel;
-    }
-
-
-    public void setSpecsLabel(JLabel specsLabel) {
-        this.specsLabel = specsLabel;
-    }
-
-
-    public JLabel getNameLabel() {
-        return this.nameLabel;
-    }
-
-
-    public void setNameLabel(JLabel nameLabel) {
-        this.nameLabel = nameLabel;
     }
 
 
@@ -331,23 +282,12 @@ public abstract class Card extends JButton {
     }
 
 
-    public Font getFontCard() {
-        return this.fontCard;
-    }
-
-
-    public void setFontCard(Font fontCard) {
-        this.fontCard = fontCard;
-    }
-
-
-    public boolean isAttackMode() {
-        return this.attackMode;
-    }
-
-
-    public void setAttackMode(boolean attackMode) {
-        this.attackMode = attackMode;
+    protected class CardActionListener implements ActionListener {
+        //classe di ascolto che implementa l'interfaccia ActionListener per gestire il click
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cardClicked();
+        }
     }
 
 }
